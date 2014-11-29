@@ -13,11 +13,15 @@ from werkzeug.contrib.fixers import ProxyFix
 import wrapper
 import codecs
 
+import jinja_filters
+
+
 
 client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
 
 app = Flask(__name__)
+app.jinja_env.filters['authors'] = jinja_filters.authors
 app.debug = True
 app.secret_key = client_secret
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -69,7 +73,7 @@ def home():
 
     context = {
         'name' : mendeley_session.profiles.me.display_name,
-        'docs': docs
+        'docs': docs[:5]
     }
 
     return render_template('home.html', **context)

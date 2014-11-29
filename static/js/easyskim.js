@@ -1,4 +1,8 @@
 $(".document").click(function() {
+  $("#summary_header").html($(this).html());
+  $("#summary_authors").html($(this).next().html());
+  $("#summary_authors > ul").dropotron();
+  $('#summary').html('<p>Preparing summary</p>');
   request($(this).data("id"));
 });
 

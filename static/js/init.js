@@ -78,6 +78,11 @@
 				hoverDelay: 0
 			});
 
+			$('.dropdown').dropotron({
+				offsetY: -15,
+				hoverDelay: 0
+			});
+
 	});
 
 })(jQuery);
