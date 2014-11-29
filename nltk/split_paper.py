@@ -11,4 +11,7 @@ def split_paper(text):
   for i in new:
     chunk.append(i)
 
+  for item in chunk:
+  	print item[1:10]
+
   return chunk
