@@ -1,0 +1,1138 @@
+IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL.
+
+25, NO. 1, FEBRUARY 1990
+
+289
+
+A High-Swing, High-Impedance
+MOS Cascode Circuit
+EDUARD SACKINGER, STUDENT MEMBER, IEEE, AND
+WALTER GUGGENBUHL, SENIOR MEMBER, IEEE
+
+Absfracf-A simple cascode circuit with the gate voltage of the cascode
+transistor being controlled by a feedback amplifier, and thus named a
+“regulated cascode,” is presented. In comparison to the standard cascode
+circuit, the minimum output voltage is lower by about 30 to 60 percent
+while the output conductance and the feedback capacitance are lower by
+about 100 times. An analytical large-signal, small-signal, and noise analysis
+is carried out. Some applications like current mirrors and voltage amplifiers are discussed. Finally, experimental results confirming the theory are
+presented.
+
+I. INTRODUCTION
+
+C
+
+IRCUITS that behave like a MOS transistor but
+feature a much higher output impedance and a significantly lower feedback capacitance are an important prerequisite for the design of high-performance analog circuits. If such a circuit is used in a tail current source of a
+differential stage, the common-mode and power-supply
+rejection ratios are improved. If it is used in a voltage
+amplifier, a large dc gain factor and a single low-frequency
+pole is obtained.
+Typically such a “super transistor” is constructed by
+stacking a second transistor with a fixed gate voltage on
+top of the main transistor yielding a so-called cascode
+circuit. Applications of this two-transistor circuit are, e.g.,
+the cascode current mirror [l, p. 2331 or the cascode op
+amp [l, p. 4101. These circuits show an increased output
+impedance in comparison to the simple current mirror or
+op amp, however, the usable output-voltage swing becomes
+narrower. By choosing optimum bias conditions, this restriction can be somewhat relaxed. This is done so in the
+so-called improvement cascode current source [ 1, p. 2261.
+In this paper a circuit, called a regulated cascode or RGC
+circuit, which further improves the respective characteristics, is presented (see Fig. 1). The output impedance is
+even higher than that of the simple cascode, and the
+output-voltage range usable for signal swing is enlarged
+Manuscript received September 8, 1988; revised April, 1989.
+E. Sackinger was with the Electronics Laboratory, Swiss Federal Institute of Technology Zurich, Zurich, Switzerland. He is now with AT&T
+Bell Laboratories, Holmdel, NJ 07733.
+W. Guggenbuhl is with the Electronics Laboratory, Swiss Federal
+Institute of Technology Zurich, ETH Zentrurn, CH-8092 Zurich, Switzerland.
+IEEE Log Number 8932694.
+
+Fig. 1. The RGC circuit (left) behaves like a “super transistor’’ (right).
+
+compared to that of the optimally biased simple cascode
+(OBC) circuit.
+For VLSI and high-frequency circuits, transistors with
+minimum feature size are often used. Such transistors
+exhibit pronounced channel-length modulation and carrier
+multiplication, even at relatively low voltages, as well as a
+moderate transconductance. The maximum dc-voltage gain,
+g,/g,,
+achievable with these transistors is therefore restricted to relatively small values. Scaling devices down,
+according to most scaling laws, further reduces this gain
+[2]. In such cases the RGC circuit with minimum-size
+transistors can be applied to obtain a small circuit area,
+good frequency response, and high dc gain simultaneously.
+The operating principle of the RGC circuit shown in
+Fig. 1 is briefly described as follows. Transistor T, converts the input voltage U, into a drain current i, that flows
+through the drain-source path of T2 to the output terminal. To obtain a high output resistance, i.e., to suppress
+channel-length modulation of T,, the respective
+drain-source voltage must be kept stable. In the simple,
+that is nonregulated cascode circuit, this is done by loading
+the drain with the low source input resistance of the
+stacked transistor T2. In the regulated cascode this is
+accomplished by a feedback loop consisting of an amplifier (T3 and I,) and T2 as a follower. In this way the
+drain-source voltage of TI is regulated to a fixed value.
+Please note that the feedback mechanism upon which the
+stabilization is based works even if T, is driven into the
+ohmic operating region, which extends the usable range for
+the output signal.
+In Section I1 the output swing, the small-signal parameters, the noise characteristics, and the transient behavior of
+the proposed circuit are analyzed. Some applications like
+current sources, current mirror, and voltage amplifiers are
+
+0018-9200/90/0200-0289$01.00 01990 IEEE
+
+IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 25. NO. 1, FEBRUARY 1990
+
+290
+
+given in Section 111. In the last section, experimental
+results are presented and put into relation with the theory.
+11. ANALYSIS
+
+A . Output Swing
+In the following, the selection of the operating point for
+the RGC circuit is discussed. Furthermore, we will derive
+analytical expressions for the output swing showing the
+superiority of the RGC circuit over the OBC circuit like,
+e.g., the improved cascode current source.
+The subsequent calculations of the large-signal performance are based on the simple quadratic strong-inversion
+model of the MOS transistor [l,p. 1001 ignoring channellength modulation. There are several reasons for choosing
+t h s simple model. 1) Although no precise numerical results can be expected from it, the obtained formulas remain simple and show the basic dependence of the typical
+characteristics on the design parameters. 2) The design
+rules usually given for the improved cascode current source
+are based on the above model, i.e., the edge of saturation is
+assumed to be at U,, - VTH.Therefore a reasonable comparison with the regulated cascode is only possible if the
+same model is applied here.
+In the following discussion of the optimal biasing, the
+input voltage is assumed to be constant, uI = VI = V,, (see
+Fig. 1). If we require T, to operate in saturation, its drain
+voltage uDSl must exceed VGsl-VTH.To maximize the
+voltage swing, the lowest possible quiescent value for uDSl
+satisfying this condition should be realized. Since the quiescent voltage V,,, is mainly determined by the feedback
+amplifier (T,, Zl),this condition leads to a design equation
+for p3 and Z,, assuming that T3 operates in strong inversion:
+
+Fig. 2. Transistor gate and drain voltages of the RGC circuit as a
+function of the output voltage uo.
+
+mentioned restriction no longer applies, because the gate
+voltage of T3 may now assume lower values than that
+given on the right-hand side of (1). Using the simple
+drain-current equation for weak inversion, i, = W / L .IDo.
+exp { uGs/( nV,)) [l, p, 1261, the design equation for optimum biasing becomes
+
+This condition can be fulfilled for any input voltage larger
+than VTH.
+Fig. 2 illustrates the performance of the RGC circuit for
+low output voltages uo. The figure is drawn for a fixed
+input voltage ur = V,,,. If the circuit is biased according
+(1) or (2), uDsl is one threshold below V,,, for high output
+voltages. In order to conduct the output current, uG2 must
+be somewhat more than one threshold voltage above uDS1.
+(Note that the figure is drawn from the case when T, and
+T2 have different dimensions.) If uo is decreased starting
+from h g h values in Fig. 2, we see that at point (I) uo has
+dropped by one threshold below U,*, meaning that T2
+enters into the ohmic operation region. Under this condition more gate voltage for T2 is needed to conduct the
+current asserted by T,; the respective increase of U,, is
+realized by the feedback amplifier (T,, I,). For even lower
+output voltages, point (11) will be reached when further
+increasing of uc2 cannot force T2 to conduct the saturation
+current from T,, i.e., this latter transistor is driven into the
+ohmic operating region as well. Note that during all phases
+T, stays in saturation because U,,, > U,,, is asserted by
+uGs2 being positive.
+In the following a mathematical description for the
+lowest value of U , where the circuit still “performs properly” is developed. With proper performance it is often
+meant that all transistors of the respective circuit are
+operating in the saturated mode [l].The output voltage
+where the first transistor, in our case T2, leaves the saturated operating mode is marked with (I) in Fig. 2. This
+voltage shall subsequently be called Vomi,(RGC,s) and
+can be calculated easily: if (1) or (2) holds, the voltage at
+the drain of T, is VGsl - VrH,while the minimum voltage
+across T, is V,, - VTH.Thus we obtain
+
+In the case where U [ is not constant, its maximum value
+max( ucsl) must be inserted for V,,,. This asserts saturated
+operation of T, for all input voltages. A more elaborate
+method to handle variable input voltages is to adaptively
+bias the feedback amplifier according to (1).An analogous
+method for the simple cascode circuit is described in [3].
+Equation (1) shows that it is only possible to find
+solutions for p, and I , if the input voltage V,,, is larger
+than 2VTH.This is not a serious limitation, however, because a relatively large gate-source voltage is often justified for other reasons as well: e.g., to obtain a temperature-independent operating point [4] or to reduce the l/f
+noise contribution of current-source or current-mirror
+transistors. Note that (1) does not state that it is impossible to use the RGC circuit with gate voltages below 2VTH,
+but only that in this case no optimum output swing is
+achieved.
+If the amplifier transistor T, is operated in weak inversion ( T I and T2 remain in strong inversion), the above- for the minimum output voltage of the RGC circuit leav-
+
+291
+
+SACKINGER AND GUGGENBUHL: HIGH-SWING, HIGH-IMPEDANCE MOS CASCODE CIRCUIT
+
+“i
+‘out
+
+where
+(7)
+OBC
+
+(OBC)
+
+Fig. 3. Output resistance as a function of the output voltage for the
+RGC and the OBC circuits, respectively.
+
+ing both stacked transistors in saturation. Note that this
+voltage is equal to the minimum output voltage usually
+given for the improved cascode current source [l,p. 2251.
+From (3) it might seem that we have gained nothing
+compared to the optimally biased simple cascode with
+respect to voltage swing. However, the comparison based
+on this “saturation criterion” is not a fair one. It is more
+appropriate to define the minimum output voltage of the
+RGC circuit as the voltage where the small-signal output
+resistance of the regulated cascode is equal to that of the
+improved cascode in saturation. This new limit shall be
+denoted VOmi,(RGC,r ) , and its definition is illustrated in
+Fig. 3.
+AC parameters like the output resistance are discussed
+in the next section. However, in order to calculate
+VOmi,(RGC,r ) we have to use some of the results in
+advance. The small-signal output resistance for low frequencies of the RGC and OBC circuits can be approximated by
+
+and the corresponding values for gal, gm2,and go, of the
+RGC and OBC circuits in saturation are taken to be equal.
+To compare the minimum output voltages of the regulated and the optimally biased simple cascode, a merit
+factor q, is defined:
+
+To obtain a meaningful result, the RGC and OBC circuits
+on which the comparison is based should have comparable
+dimensions. It seems reasonable to assume equal output
+currents I , for both circuits and that the lower and upper
+transistors (T, and T,) of the respective circuits have
+corresponding betas (p, and p2). The merit factor of (8)
+then becomes
+
+IB,
+11,
+
+=
+
+rK I I ’
+
+(9)
+
+The merit factor q, is independent of the output current or
+the input voltage and improves for an increasing p1/p2
+ratio or a decreasing q.The latter means that a high loop
+gain in the regulated cascode is profitable.
+In order to illustrate the theoretical calculations as a
+basis
+for later approximations of symbolic expressions, we
+(4)
+will introduce a practical circuit example which has been
+simulated with ESPICE.’ The transistors feature the diand
+mensions T, = T, = T3= 25 pm/3 pm and are simulated
+for the 3-pm SACMOS technology [ 5 ] .The current source
+I , is realized with a 3-pm/3-pm p-channel current mirror
+and a 4-MQ resistor from the mirror input to ground
+supplying about 1.3 pA at VDD= 5 V. The input voltage is
+respectively, where go, is the output conductance and g,,
+chosen to be 1.1 V yielding an output current of I o =
+is the transconductance of the respective transistor
+(for 60 pA. The simulated V,, is 0.60 V which is exactly one
+v = 1,2,3) and goi is the conductance of the current source threshold voltage (0.5 V) below V,, confirming the correct
+Zl. We see from (4) and ( 5 ) that r,,,(RGC) exceeds dimensions of the feedback amplifier according to (1). For
+rou,(OBC) by a factor gm3/( go, + goi), which approxi- an output voltage of 5 V all transistors are in saturation
+mately corresponds to the loop gain of the RGC circuit and a uG2 of 1.63 V and an output resistance of 905 MQ
+and is typically in the neighborhood of 100.
+are obtained. For an output voltage of 0.83 V, T, is in the
+As shown earlier, if U , of the RGC circuit is lowered, ohmic operating region and uG2 increases to 1.76 V while
+the first transistor leaving the saturated operating mode is the output resistance decreases to 13.0 MQ. This is about
+T2. This means that the output resistance of the regulated the output resistance of the corresponding simple cascode
+cascode will decrease initially because the factor g,,/go,
+and thus VOmin(RGC,
+r ) = 0.83 V. The merit factor for the
+of (4) becomes smaller when T, enters into the ohmic output swing follows as q, = (1.63 V-0.50 V)/0.83 V =
+operation mode. From the MOS equation and (4) and (5), 1.36.
+the minimum output voltage VOmi,(RGC,r)can be deInserting the numbers &/p2 = 1 and \k = 0.88 (calcurived:
+lated with the small-signal parameters of the next section)
+into (9) yields a theoretical merit factor q, =1.29.
+‘ESPICE (Extended Simulation Program with Integrated Circuit Emphasis) is an extension of SPICE developed by Phdips.
+
+292
+
+IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL.
+
+TABLE I
+TYPICAL
+SMALL-SIGNAL
+PARAMETERS
+OF THE TRANSISTORS
+CONSTITUTING
+A N RGC CIRCUIT
+Parameter
+2'1 I Tz (sat) I 2'2 (ohm) I T3
+I Srn
+I 205 I
+222 I
+133 I 33
+3.5
+148 0.3
+5.1
+90
+41 44
+44
+44
+c g
+8.4
+22 8.4
+8.4
+Cgd
+68 44
+30
+58
+C O
+c h
+78
+78
+-
+
+I
+
+25, NO. 1, FEBRUARY 1990
+
+I
+
+0
+
+Y11
+
+(-56.4
+(-56.4
+
+I
+
+I
+
+I .
+
+YZ?
+
+5, B
+
+xb
+
+Y23
+
+Substrate
+
+Fig. 4. Small-signal model of an MOS transistor.
+
+B. Small-Signal Parameters
+
+Yij
+
+All small-signal calculations presented in this section are
+based on the ac MOS-transistor model shown in Fig. 4.
+The source and bulk terminals of all transistors are supposed to be interconnected as shown in Fig. 1. As a
+consequence of the floating p-well of T2, the transistor has
+a capacitance C,,, from the source/bulk node to the substrate ( udd). The current source I , is modeled by a parallel
+connection of a conductance go,, a capacitance CO,,
+and a
+transconductance g,, controlled by udd. The latter models
+the power-supply dependence of the auxiliary current
+source.
+The regulated cascode circuit of Fig. 1 is a three-port
+network whose small-signal characteristics can be described by nine y parameters in the s domain:
+= y11Y
+I o = Y21Y
+31y
+'dd = Y
+
++ Y12vo + Y 1 3 h d
++ Y22K + Y
+
++ Y320'
+
+2 3 b
+
++ y33'dd.
+
+(10)
+
+The interesting parameters, namely yll (input admittance),
+y,, (reverse admittance), y,, (transmittance), y,, (output
+admittance), and y,, (influence of Vdd to Z,) have been
+calculated symbolically with the help of the SYNAP and
+MACSYMA programs.2 The expressions thus obtained are
+very large and unwieldy. It is therefore reasonable to
+evaluate these symbolic expressions in a first step for
+typical numerical values in order to become familiar with
+the parameter's order of magnitude and the approximate
+pole/zero locations.
+In Table I typical values for the transistor's small-signal
+parameters are given. The values for the current-source
+small-signal model are go, = 0.16 pS, CO,= 2.7 fF, and
+g,, = 0.29 p S . All values correspond to the example circuit
+'SYNAP (SYmbolic aNAlysis Program) is a circuit analysis program
+developed at the Integrated Systems Laboratory. ETHZ, and CSEM,
+Switzerland. MACSYMA (MAC'S SYmbolic MAnipulation system) is a
+computer algebra program developed at the M.I.T. Laboratory for Computer Science.
+
+- 63.6i)MHz
+
+0
+-1l4kHz
+-98.2 MHz
+- 125 MHz
+-414 MHz
++3.88 GHz
+-16.1 kHz
+-27.7 MHz
+-85.9MHz
++145 kHz
+-157 MHz
+-305 MHz
+poles
+(-45.4 + 71.4i) MHz
+(-45.4 - 71.4i) MHz
+
+Yl?
+
+YZl
+
+I
+
++ 63.61')MHz
+
+-
+
+0
+-26.5 MHz
+-130 MHz
+0
+-533 kHz
+-357 MHz
+-29.8 MHz
+-423 MHz
++3.88GHz
+-98.1 kHz
+-20.2 MHz
+-324 MHz
++140 kHz
+-29.8 MHz
+-401 MHz
+
+-32.7 MHz
+-105 MHz
+
+TABLE I11
+NUMENCAL
+VALUESFOR THE CAPACITANCES
+AND
+(TRANS-)CONDUCTANCES
+OF THE ?: PARAMETERS
+BASEDON THE VALUES OF TABLE
+1
+
+I Parameter I
+I ci
+
+I
+
+Saturated Case
+52.5fF
+0.00182fF
+205 pS
+1.1 nS
+
+1 T? not Saturated I
+I
+
+52.6fF
+0.127fF
+205 p S
+76.8 nS
+
+1
+
+introduced in the previous section. The parameters of T2
+are given for the saturated and the nonsaturated operating
+modes discussed in the example.
+The numerical values for the poles and zeros of the y
+parameters for two cases-1) all transistors saturated and
+2) all transistors except T, saturated-are summarized in
+Table 11. Parameters y,, and y2* have nonzero dc values
+that we will denote as g, and go, re~pectively.~
+Because
+parameters y,, and y,, are zero at dc, we eliminate the
+respective zero and specify the corresponding capacitances
+C, and C, at dc. Numerical values for these (trans-)conductances and capacitances are given in Table 111.
+In order to obtain a simple design equation, we will now
+ignore all poles and zeros above 20 MHz in Table 11. With
+this assumption the y parameters can be written in the
+form
+y,,
+
+=
+
+sc,
+
+y,,
+
+=-
+
+scr(l+S T , )
+
+3Some symbols like g,, have several meanings in t h s text. For example,
+g can stand for the output conductance of a single transistor, of the
+$GC circuit, or of an application circuit. From the context, however, the
+intended meaning should always be obvious.
+
+SACKINGER
+
+AND G U G G E N B ~ H LHIGH-SWING,
+:
+HIGH-IMPEDANCE MOS CASCODE CIRCUIT
+
+The following symbolic approximations for the capacitances and (trans-)conductances have been obtained:
+
+c,= Cgl+ Cgdl
+c r = Cgdl.
+
+go2 (go3
+
++ go,)
+
+gm~gm3
+
+R m = gml
+
+go = go,.
+
+go2 ( go3 + go,)
+gm2gm3
+
+293
+
+C. Noise
+
+A noise analysis of the RGC circuit for low frequencies
+has been carried out. For this purpose noise sources u : ~are
+gate leads of all transistors T, and a noise
+inserted into the current source iil is connected in parallel to I,. The
+small-signal circuit of Fig. 4, without the capacitors, was
+used to model the low-frequency behavior of the transistor.
+With these assumptions the equivalent noise source U&
+at the input of the circuit has been approximated:
+
+go,
+
+gmdd =
+
+( go, + gm, ) . -
+
+(12)
+
+g m3
+
+and
+
+where
+
+In the above equations C,, is the sum of Cg2 and C,,,.
+While C, and g,, of the regulated cascode circuit are about
+the same as those of a single transistor ( Tl),the parameters
+C,. and g, are improved by a factor gm2/go2.gm3/
+( g o , + g,,), that is the intrinsic gain of T2 times the amplifier gain. The power-supply dependence is that of the
+auxiliary current source (go,+ g,, ) reduced by a gain
+factor gm3/gO1.The time constants T, and To depend
+mostly on Cgd2.To will be larger than T, since it contains
+two gain factors while T, contains only one. The right
+half-plane zero described by Td is mainly due to Cb2.If the
+p-well of T, were grounded, Td would be much smaller.
+It is interesting to compare the y parameters of the
+regulated cascode to those of the simple cascode. A calculation for the saturated simple cascode (OBC) shows that
+the y parameters have the same form as those given in (11)
+for the regulated cascode. The main difference is that the
+output resistance rout= l/go of the RGC circuit is a factor
+g m 3 / ( g o 3+ go,) larger than that of the simple cascode. We
+can thus define a second merit factor 11, for the output
+resistance in the saturated region:
+
+Typical exact numbers for c2 based on the values of
+in
+in the saturated and 113 X
+Table I are 117 X
+the nonsaturated case; the values of c3 are 602 X I O p 6 and
+584 x
+respectively. The reason why the operating
+mode of T2 has nearly no influence on the noise factors
+can be understood by the following analogy. The equation
+for the equivalent input noise voltage, (15), is similar to
+that describing a three-stage amplifier whose first stage
+consists of T,, second of T3 and I,, and third of T,. But
+the gain of an amplifier’s last stage, which in our case
+varies strongly with uo, is of practically no importance for
+the input-referred noise performance.
+Transistor Tl is the dominant noise source (U:,) in the
+regulated as well as the simple cascode circuit; the noise
+performances of both cascodes are therefore virtually the
+same. On the other hand, the noise generated by T2 is
+more fully suppressed in the RGC circuit than in the
+in the example. On
+simple cascode, where c, = 600 X
+the other hand, the RGC circuit contains an additional
+noise source introduced by the feedback amplifier, however, it contributes only a negligible amount of noise to uzq.
+
+D. Large-Signal and Transient Behavior
+The value for 11,. using the typical small-signal parameters
+of Table I is 72. Furthermore, the regulated cascode features a 72 times lower feedback capacitance C,. The input
+capacitance C, of the regulated cascode is smaller than
+that of the simple one by about Cgdl.gm1/gm2
+( = 7.8 fF
+for the typical values). The dc power-supply dependence of
+the simple cascode is determined by the stability of the
+bias voltage V,, instead of the bias current Il. Both time
+constants T, and To are increased with respect to the
+simple cascode circuit.
+
+The large-signal and transient behavior of the RGC
+circuit shall be analyzed in a qualitative way. Typical
+numbers obtained with ESPICE simulations for the example RGC circuit and a correspondingly dimensioned optimally biased simple cascode are given.
+The dc large-signal output characteristics of the RGC
+circuit has already been covered in Section 11. To summarize, the output conductance as well as the minimum
+allowable output voltage are lower than that of the optimally biased simple cascode. The dc large-signal transfer
+characteristic of the RGC circuit is quadratic as long as U ,
+
+IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 2 5 , NO. 1, FEBRUARY
+
+294
+
+is small enough and Tl operates in saturation. For larger
+ui, the relation between vi and io becomes linear, because
+Tl enters into the ohmic operating region and uDsl is still
+kept constant. In contrast, the output current of the simple
+cascode is limited for large U , because uDsl breaks down
+with increasing current. In our example, the RGC circuit
+delivers 320 p A for U, = 2 V, while the simple cascode
+supplies only 170 pA for the same input voltage. This
+means that the large-signal transfer characteristic of the
+RGC circuit is superior to that of the simple cascode.
+If a positive voltage step is applied to the input of the
+RGC circuit, uDsl decreases initially and then is regulated
+back to its original value. Because of the noninverting
+feedforward path (mainly through C,,) of the feedback
+amplifier (T,, Zl),this initial breakdown will be larger than
+in the nonregulated case. As a consequence Tl may temporarily be driven into the ohmic operating mode thus
+delivering less current than expected. If an input voltage
+step from 0.7 to 1.1 V is applied to the example circuits,
+the full current is reached after 18 ns for the RGC and
+after 8 ns for the simple cascode circuit. This effect may
+cause a slew-rate reduction of the respective op amp or
+OTA to which the regulated cascode is applied. To avoid
+t h s effect, a feedback amplifier with low feedforward
+should be used. A negative input-voltage step has no
+corresponding effect on the output current.
+If the input or output voltage of the RGC circuit is
+forced to zero, the output of the feedback amplifier will
+saturate near ground or VDD,respectively. Switching on
+the input or output voltage thus necessitates the amplifier
+output to slew several volts to reach its operating value. In
+the example circuit a delay of about 100 ns from input- or
+output-voltage switching to the respective output-current
+change is observed. The corresponding delays of the simple
+cascode are a few nanoseconds. In switching applications
+like comparators the output swing of the feedback amplifier should therefore be limited, e.g., by clamping.
+111. BASIC APPLICATIONS
+Some basic applications of the RGC circuit are analyzed
+and compared to conventional implementations. The circuits being discussed are a current mirror, a constant
+current source, and a voltage amplifier.
+A . Regulated Cascode Current Mirror
+A current mirror based on two RGC circuits is shown in
+Fig. 5. The input current is denoted as i, and the output
+current is designated io. Because of the circuit's symmetric
+topology, there is virtually no systematic error in the ratio
+of the input and output currents at dc in contrast to, e.g.,
+the simple Wilson current mirror [ l ,p. 2351. The output
+swing of the regulated cascode current mirror is comparable to that of the simple current mirror [l, p. 2271 and
+much better than that of the simple cascode current mirror
+[ l , p. 2331, because the latter is neither regulated nor
+optimally biased. Compared to other stacked current mir-
+
+L
+
+A
+
+L
+
+1990
+
+A
+
+Fig. 5. Current mirror based on two RGC circuits
+
+rors (cascode or Wilson), the regulated cascode current
+mirror has the advantage of a lower input-voltage drop U,:
+For the RGC current mirror U [ is equal to the gate-source
+voltage of T I , while in the other cases the sum of two
+gate-source voltages is lost. The simple cascode and simple current mirror need no bias sources and thus have the
+advantage of power-supply independence at dc.
+If we assume that the regulated cascodes in the left
+(primed) and right (unprimed) part of the current-mirror
+circuit (Fig. 5 ) are characterized by equal small-signal
+parameters and the input is driven by an ideal current
+source, we can approximate the output admittance yo =
+Zu/Vufor vd, = 0 as
+
+where
+
+The result obtained is approximately equal to y22 of the
+RGC circuit alone. Since there is a single low-frequency
+zero, the output admittance yo can be modeled by a
+parallel connection of rout and CO,,. The main contribution
+to the output capacitance is Cgd2.
+When T2 is driven into
+the ohmic region, g o 2 / g , , will increase and C,,,, will add
+some extra capacitance to CO,,. This increase of the output
+capacitance can also be explained by the fact that for low
+output voltages the gate voltage of T2 is strongly dependent on uo (see Fig. 2), thus giving rise to a charge transfer
+between the output terminal and T2.
+It is interesting to compare the output admittance of the
+regulated cascode current mirror to that of other current
+mirrors. Approximative calculations done for the simple
+current mirror shown that
+1
+rout = go1
+
+Calculations done for the simple cascode current mirror
+
+295
+
+SKCKINGER AND GUGGENBUHL: HIGH-SWING. HIGH-IMPEDANCE MOS CASCODE CIRCUIT
+
+yield
+
+Beside the expected differences in the output resistances,
+there are also significant differences in the output capacitances. Using our sample values, we get 47.1 fF for the
+simple current source, 20.4 fF for the cascode current
+source, and 10.9 fF for the regulated cascode current
+source. The capacitance of the simple current mirror is
+mainly determined by Col, that of the simple cascode
+mirror is about 2Cgd2, and that of the regulated cascode
+mirror is approximately C,,,. How can the factor 2 in the
+output capacitance of the simple cascode be explained?
+This is a consequence of the capacitive current through
+Cgd2which flows into the biasing network. Because this
+network is at the same time the current-mirror input path,
+this current is mirrored to the output where it appears a
+second time. In the regulated cascode current mirror this
+capacitive current flows into a path isolated from the
+current-mirror input, thus explaining the lower output
+capacitance of the regulated cascode current mirror.
+The small-signal current-transfer function A , (s) = I o / I l
+for V, = V,, = 0 has been investigated numerically. The dc
+value of A , ( s ) is very close to one, as expected. Unfortunately, A , ( s ) has more than one dominant pole and an
+approximative formula of the frequency behavior has not
+been found. Numerical calculations based on our example
+circuit yield three poles, one at - 90.9 MHz and the others
+at ( - 26.1 136i) MHz, as well as three zeros located at
+- 125 MHz, -414 MHz, and +3.88 GHz. This corresponds to a 3-dB low-pass bandwidth of 200 MHz which
+compares to the bandwidths of the simple current mirror
+and the cascode current mirror with 270 and 200 MHz,
+respectively.
+From the complex-conjugated poles at ( - 26.1 & 1362)
+MHz, which are caused by the feedback mechanism of the
+RGC circuits, one can expect a peaking of the currenttransfer function. A peaking of 7 dB at 140 MHz can
+actually be observed in the example, but it is not a serious
+problem for most applications.
+B. Regulated Cascode Constant Current Source
+
+The circuit of Fig. 5 can also be used as a constant
+current source, if i, is kept constant. When the circuit is
+used as a current source, i.e., an exact matching of i, and
+io is not imperative, the left part of the circuit (T;, T i , T i ,
+and 1;) can be replaced by a single gate-drain connected
+transistor ( T;), thus simplifying the original circuit. For
+the case where the circuit is driven by a bias voltage
+VI = VBIAS,the left part of the circuit can be omitted
+completely. These simplifications have little influence on
+the output characteristic and the above results for y, also
+apply to the regulated cascode current source.
+
+VDO
+
+1
+
+Fig. 6.
+
+1
+
+1
+
+Single-ended amplifier using one RGC circuit as a transconductance element and a second one as current source.
+
+The output characteristics of the simple current source
+[l, p. 2191 and the standard cascode current source [l, p.
+2241 are equal to the corresponding mirrors discussed
+above. The improved cascode current source [l,p. 2261 is
+optimally biased and therefore features a better output
+swing than the simple cascode current source, but as has
+been shown in Section 11, it is still inferior to that of the
+regulated cascode current source. The output impedance of
+the improved cascode can be approximated by
+1 gn12
+rout= - .
+go,
+
+go2
+
+The output resistance is equal to that of the simple cascode, but the output capacitance (12.0 fF in the example)
+corresponds to that of the regulated cascode because the
+bias network of the improved cascode is decoupled from
+the input path. Note, that the improved cascode current
+source, like the regulated cascode current source, has a dc
+power-supply dependence.
+
+C. Regulated Cascode Voltage Amplifier
+The single-ended amplifier depicted in Fig. 6 is based on
+two complementary RGC circuit blocks. The unprimed
+one acts as a transconductance element while the primed
+one is used as a constant current source as discussed
+earlier. This amplifier features a single low-frequency pole
+and a large output swing. A similar circuit is investigated
+in [6]. The use of such an amplifier with capacitive loading
+is typical in switched-capacitor circuits where the static
+gain A,, determines the precision of these circuits.
+An approximation based on the typical values of the
+example RGC circuit and C, = 1 p F yields
+1
+
+where
+
+296
+
+IEEE JOURNAL OF SOLID-STATE CIRCUITS. VOL.
+
+25. NO. 1, FEBRUARY 1990
+
+RGC OBC
+
+7
+A
+
+215
+
+0
+I(L
+w
+
+5
+
+210
+
+3
+
+a
+
+I-
+
+0
+3
+
+The gain-bandwidth product lAuol/Ta is thus g m l / C L .
+For the example circuit we obtain an A,, of 99 dB and a
+gain-bandwidth product of 27.31.9 MHz.
+A conventional three-stage amplifier exhibits a similar
+dc gain, but it would necessitate a compensation scheme,
+because it has three poles at nearby frequencies. The
+regulated cascode amplifier, featuring only one load-capacitor dependent pole, has the advantage of being self-compensating.
+The input conductance of the regulated cascode amplifier can be approximated by
+l+sT,
+y, = SCin--1 + sT,
+
+,
+
+205'
+0
+
+Fig. 7. Test circuit for measuring the output characteristics of a regulated (S, open) and an optimally biased simple cascode (S, closed)
+circuit.
+
+,
+'
+
+'
+
+'
+
+'
+
+'
+
+'
+
+I
+
+4
+
+OUTPUT VOLTAGE vo [ V I
+
+Fig. 8. Measured output characteristics of the RGC and OBC circuits
+for low output voltages. In order to illustrate the regulating process,
+uGz is also plotted (scale on the right-hand side).
+RGC OBC
+
+7
+
+215
+
+I
+
+;a
+OBC-
+
+20 5
+
+0
+
+2
+
+4
+
+OUTPUT VOLTAGE vo[V]
+
+Fig. 9. Measured output characteristics of the RGC and OBC circuits
+for low output voltages. On the right-hand scale the dependence of
+uDsl is given.
+
+where
+simple cascode. The input voltage V, = V, = V,, = 1.4 V
+and the auxiliary current source I , = 1.4 pA are constant.
+Il has been chosen according to (1) such that the drain
+voltage of T, is one threshold voltage below its gate
+voltage; this is VDsl=0.75 V for a measured threshold
+voltage VTH=0.65 V. During the measurement the output voltage uo is swept while the output current io and
+Ci:, is the input capacitance for frequencies much higher the node voltages uDsl and uG2 are monitored with a
+than the pole (-344 Hz) and zero (-1.44 kHz) of the HP 4145A semiconductor parameter analyzer.
+input admittance. For very low frequencies the input caThe plot of Fig. 8 shows the output current and the gate
+pacitance is relatively high due to the Miller multiplication voltage of T2 of the RGC and the OBC circuits for an
+of Cgdl ( Ci, = 221 fF); for frequencies above some kilo- output voltage range of 0 to 4 V. The higher output
+hertz this capacitance reduces to about Cgl (CL = 52.8 fF). resistance and larger voltage swing of the RGC circuit can
+It is also possible to use the RGC circuit to improve a be seen clearly from this measurement. The underlying
+differential amplifier. In this case the differential-pair tran- regulating process is also illustrated nicely by this figure:
+sistcrs are each replaced by a RGC circuit and the current for output voltages above 1.5 V, uG2 varies only very little
+mirror is built as described in Section III-A. The advan- and is about equal to that of the simple cascode. The small
+tages are the same as for the single-ended amplifier: high variations compensate for the channel-length modulation
+gain, self-compensation, and large output swing.
+of T2 and thus make the output resistance high. Below
+1.5 V, uG2 increases rapidly driving T, into the ohmic
+operation region. As a consequence io is kept stable for
+IV. EXPERIMENTAL
+RESULTS
+output voltages well below 1 V. Fig. 9 additionally shows
+A test circuit which can be operated as a regulated or an the drain-source voltage of T,. This plot confirms that I ,
+optimally biased simple cascode has been bread-boarded for the regulated cascode and V, for the simple cascode are
+(see Fig. 7). All transistors used in the circuit are fabri- chosen such that T, is biased at the edge of saturation
+cated in a 4-pm technology and have the dimensions (0.75 V) in both cases, and thus the comparison is fair. It is
+W = 7 pm and L = 4 pm. If switch S , is open, the gate of shown by the curves how the feedback loop in the RGC
+T, is controlled by the feedback amplifier (T3,Zl),that is, circuit stabilizes uDSl for as low voltages as possible. An
+the circuit operates as a regulated cascode; if S, is closed, analogous measurement to that depicted in Fig. 8 has been
+the gate voltage of T, is supplied by the voltage source V, carried out for the larger output-voltage range of 0 to 30 V
+which is chosen such that the circuit is an optimally biased in Fig. 10. For the simple cascode a significant increase in
+
+297
+
+SACKINGERA N D G U G G E N B U H L :HIGH-SWING, HIGH-IMPEDANCEMOS CASCODE CIRCUIT
+
+Q
+
+230
+
+,
+1
+0
+
+-
+
+OBC-
+
+k-
+
+z
+
+w
+a:
+
+fj
+
+>”
+W
+
+120::
+
+RGC+
+
+220-
+
+3
++
+
+.
+
+c
+a
+
+0
+3
+
+.
+
+21 0
+
+-I-=:.I_
+
+I ?
+
+cOBC
++RGC
+
+-_.
+
+1 1 5 g
+
+output current above 12 V due to carrier multiplication
+can be noticed, until breakdown takes place at about 27 V.
+In contrast, the regulated cascode supplies a stable output
+current up to the breakdown voltage. The plot shows the
+feedback mechanism of the RGC circuit, i.e., how the gate
+voltage of T, varies in order to suppress the effects of
+carrier multiplication.
+In order to compare these experimental results with the
+theory, the characteristic parameters of the transistors used
+for the measurements in Figs. 8-10 have been determined
+experimentally in the respective operating point: g,, =
+g,, = 57 PS, gm3 = 12 PS, go, = go, = 3.3 PS, go, + go, =
+0.11 pS, p l = p 2 = 7 5 pA/V2, VT,=0.65 V, and I o =
+21 pA.
+From (6) and (3) we can calculate the minimum output
+voltages for the two cascode circuits: Vo-(RGC, r ) = 0.75
+V 0.20 V = 0.95 V and V,-(OBC>
+= 0.75 V + 0.75 V =
+1.5 V = Vo-(RGC, s). The merit factor for the output
+swing of the RGC circuit thus is q s =1.57, which is
+confirmed by (9). The theoretical values for the minimum
+voltages are marked in Figs. 8 and 9; they are in reasonable agreement with the measured curves. The plots suggest that the calculated value of Vo-(OBC) is optimistic
+and the gain in output swing for the regulated cascode is
+better than the calculated merit factor.
+The theoretical values of the output resistances, (4) and
+( 5 ) , for both cascodes are r,,,(RGC)=570 M a and
+r,,,(OBC) = 5.2 M a corresponding to a merit factor q, =
+110. If these resistances are compared to the slopes of the
+curves in Fig. 10, we find that the actual output resistances
+are larger than predicted. This discrepancy can be explained by the fact that the transistor output conductances
+go,, go,, and go, used for the calculation were determined
+at the edge of saturation. According to the simple MOS
+model (with X f 0 V-’), these conductances should stay
+constant in the whole saturated operating region; in reality, however, they decrease for drain-source voltages above
+the edge of saturation, thus leading to a higher output
+resistance.
+
++
+
+V. CONCLUSIONS
+A cascode circuit which improves the relevant analog
+characteristics of MOS transistors like usable output-voltage swing, output resistance, and feedback capacitance
+well beyond the values known for the simple cascodes used
+
+today has been presented. The superiority of this regulated
+cascode over the simple cascode circuit has been demonstrated analytically and experimentally. Applications of
+t h s circuit include high-impedance tail current sources,
+precision current mirrors, and differential amplifiers with
+high-gain, common-mode, and power-supply rejection ratios. The regulated cascode circuit is suitable for VLSI and
+high-frequency circuits where minimum-size transistors
+
+high-frequency OTA. Further applications might be in
+high-frequency, high-Q SC filters [lo].
+The regulated cascode principle can also be realized in
+bipolar technology resulting in similar advantages as those
+described here.
+
+ACKNOWLEDGMENT
+The authors would like to thank P. E. Allen, W. C.
+Black Jr., and J. Goette for useful discussions, S. J. Seda
+for his program SYNAP, and the Centre Suisse d’Electronique et de Microtechnique SA for providing the MOS
+transistors.
+
+REFERENCES
+P. E. Allen and D. R. Holberg, CMOS Analog Circuit Design.
+New York: Holt, Rinehart and ‘?ston,
+1987.
+S. Wong and C. A. T. Salama, Impact of scaling on MOS analog
+performance,” IEEE J . Solid-State Circuits, vol. SC-18, no. 1, pp.
+106-114, Feb. 1983.
+[31 R. Castello and P. R. Gray, “A high-performance micropower
+switched-capacitor filter,” I E E E J . Solid-State Circuits, vol. SC-20,
+no. 6, pp. 1122-1132, Dec. 1985.
+[41 R. A. Blauschild, P. A. Tucci, R. S. Muller, and R. G. Meyer, “A
+new NMOS temperature-stable voltage reference, IEEE J . SolidState Circuits, vol. SC-13. no. 6, pp, 767-773, Dec. 1978.
+R. E. Luscher and J. Solo de Zaldivar, A high density CMOS
+process,” in ISSCC Dig. Tech. Papers, 1985, pp. 260-261.
+B. J. Hosticka, “Improvement of the gain of MOS amplifiers,”
+I E E E J . Solid-State Circuits, vol. SC-14, no. 6, pp. 1111-1114, Dec.
+1070
+
+‘Sackinger and W. Gugenbuhl, “A versatile building block: The
+CMOS differential difference amplifier,” I E E E J . Solid-State Circuits, vol. SC-22, no. 2, pp. 287-294, Apr. 1987.
+[8] E. Sackinger and W. Guggenbuhl, “An analog trimming circuit
+based on a floating-gate device,” IEEE J . Solid-State Circuits. vol.
+23, no. 6 . pp. 1437-1440,Dec. 1988.
+[9] E. Sackinger. “Theory and monolithic CMOS integration of a
+differential difference amplifier,” Ph.D. dissertation, Swiss Federal
+Institute of Technology, Zurich, 1989: also in Series in Microelectronics. W. Fichtner, W. Guggenbuhl, H. Melchior, and G. S.
+Moschytz. Eds. Konstanz. W. Germany: Hartung-Gorre Verlag,
+1989.
+[lo] C. A. Laber and P. R. Gray, “A positive-feedback transconductance amplifier with applications to high-frequency, high-Q CMOS
+switched-capacitor filters,” IEEE J . Solid-State Circuits, vol. 23,
+no. 6, pp. 1370-1378, Dec. 1988.
+[7]
+
+Eduard Sackinger (S’84) was born in Basel,
+Switzerland, on August 13, 1959. He received the
+M.S. and Ph.D. degrees in electrical engineering
+from the Swiss Federal Institute of Technology,
+Zurich, Switzerland. in 1983 and 1989, respectively.
+In the fall of 1983 he joined the Electronics
+Laboratory of the Swiss Federal Institute of
+Technology where he investigated analog applications to floating-gate devices. His doctoral
+work was on the theory and CMOS integration
+
+298
+
+IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL.
+
+He was an Assistant in the Department of
+Electrical Engineering of the Swiss Federal Institute of Technology for about six years, while
+pursuing the Ph.D. degree. Thereafter, he joined
+Contraves AG, Switzerland, where he was Manager of an R&D Department, involved in the
+field of electronic circuit and subsystem design.
+Since 1973 he has been a full Professor of Electronic Circuit Design at the Swiss Federal Institute of Technology. His main interests are lownoise circuits and computer hardware for signal
+
+of a differential difference amplifier. Since September of 1989 he has
+worked as a consultant for AT&T Bell Laboratories, Holmdel, NJ, in the
+field of neural network chip design. His research interests include analog
+CMOS integrated circuit design.
+
+Walter Guggenbiihl (SM’60) received the diploma in electrical engineering
+in 1950 from the Swiss Federal Institute of Technology, Zurich, Switzerland.
+
+25, NO. 1, FEBRUARY 1990
+
+processing.
+
+
