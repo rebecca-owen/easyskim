@@ -2,6 +2,7 @@ import os
 from urlparse import urlsplit, urlunsplit
 import tempfile
 from subprocess import check_output
+import json
 
 import urllib
 from flask import Flask, redirect, render_template, request, session
@@ -56,7 +57,7 @@ def home():
     for document in mendeley_session.documents.iter():
         docs.append({'title': document.title, 'id': document.id})
 
-    print convertToTxt(getPdf(mendeley_session, docs[0]['id']))
+    # print convertToTxt(getPdf(mendeley_session, docs[0]['id']))
 
     context = {
         'name' : mendeley_session.profiles.me.display_name,
@@ -65,6 +66,22 @@ def home():
 
     return render_template('home.html', **context)
 
+@app.route('/document', methods=['POST'])
+def document():
+    if 'token' not in session:
+        return json.dumps({ "error": "not logged in" }), 500
+
+    mendeley_session = get_session_from_cookies()
+
+    doc_id = request.form['doc_id']
+    text = convertToTxt(getPdf(mendeley_session, doc_id))
+    final_text = '<pre>%s</pre>' % text
+    return json.dumps({ "text": final_text }), 200
+
+@app.route('/static/<path:path>')
+def static_proxy(path):
+    # send_static_file will guess the correct MIME type
+    return app.send_static_file(os.path.join('static', path))
 
 @app.route('/logout')
 def logout():

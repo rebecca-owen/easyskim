@@ -1,0 +1,29 @@
+#documents {
+  overflow:auto;
+  height:500px;
+  width:500px;
+  float:left;
+}
+/*
+#documents p {
+  color: #0099FF ;
+}*/
+a:link {
+  color: #0099FF ;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #0099FF ;
+}
+
+a:hover {
+    color: #66CCFF;
+}
+
+#summary {
+  overflow:auto;
+  height:500px;
+  width:800px;
+  float:right;
+}
