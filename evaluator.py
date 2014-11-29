@@ -1,6 +1,8 @@
 def evaluator():
 	pass
-def authorCounter():
+def getBibl
+def authorCounter(pdfText):
 	pass
-def paperCounter():
-	pass
+def paperCounter(pdfText):
+	possibilities = "[(BIBLIOGRAPHY)(Bibliography)(References)(REFERENCES)()]"
+	re.sub("".join([".*",possibilities]),"",pdfText))

@@ -17,12 +17,13 @@ options[3] is for nltk, and specifies..."""
         product.append(alchemyExtract(cleanText,options))
     if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
         print(options)
-        raise Exception("No valid options selected. Please enter some combination of 'nltk','sections',and 'alchemy")
+        raise Exception("""No valid options selected. Please enter some 
+            combination of 'nltk','sections',and 'alchemy""")
     return product
 
 def nlpExtract(cleanText,options):
     from sys import path
-    path.append("/home/user/easyskim/nltk")
+    path.append("~/easyskim/nltk")
     import FrequencySummarizer
     f = FrequencySummarizer.FrequencySummarizer()
     try:
@@ -35,7 +36,8 @@ def nlpExtract(cleanText,options):
     return f.summarize(cleanText,options[3])
 
 def alchemyExtract(cleanText,options):
-    """In this case,options[1] should specify the number of keywords to be used. Default to 4."""
+    """In this case,options[1] should specify the number of keywords to be 
+    used. Default to 4."""
     try:
         options[1]=int(options[1])
     except IndexError as e:
@@ -43,8 +45,8 @@ def alchemyExtract(cleanText,options):
     except ValueError as e:
         print("You selected alchemy, and options[1] was not a valid integer.")
         raise e
-    from sys import path
-    path.append("/home/user/src/test/alchemyapi_python")
+#    from sys import path
+#    path.append("/home/user/src/test/alchemyapi_python")
     from alchemyapi import AlchemyAPI
     alch = AlchemyAPI()
     response = alch.keywords('text',cleanText,{'sentiment':1})
@@ -61,7 +63,6 @@ def alchemyExtract(cleanText,options):
     
 def regexSeperate(cleanText,options):
     import re
-    
 
 def seperateSections(cleanText,options):
     """Takes in cleanText as a string, returns a list of seperated sections."""
@@ -72,7 +73,6 @@ def seperateSections(cleanText,options):
         attempt = [a for a in attempt if len(a)>6]
         if len(attempt)>2:
             notFails.append(attempt)
-#    print(notFails[0])
     lessFails = []
     failCount = []
     for notFail in notFails:
@@ -88,7 +88,6 @@ def seperateSections(cleanText,options):
         for notFail in v[1]:
             print(notFail)
     sortedVec = sorted(vec,lambda k,r: (k))
-#    print(sortedVec)
     best = sortedVec[0]
     return best
 
@@ -96,6 +95,5 @@ if __name__ == '__main__':
     import codecs
     cleanText=codecs.open("sample.txt",encoding="utf-8").read()
     ex = extract(cleanText,['alchemy',5])
-    #print(ex)
-#    print(seperateSections(cleanText,""))
-    print(extract(cleanText,['nltk','','',3]))
+    #print(seperateSections(cleanText,""))
+    #print(extract(cleanText,['nltk','','',3]))
