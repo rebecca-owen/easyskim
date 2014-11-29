@@ -5,11 +5,14 @@ in the Austral segment, which extends from Argentina, with sig- nificant wedges 
 province in Brazil, where the traditional turbidite and carbonate fields of the post-salt and giant to super-giant fields reservoired in pre-salt microbialites of Santos, Campos and Espírito Santo Basins are located. 
 
 
+
 Adjacent to the Southern/Southeastern margin, on the onshore
 portion, outcrops of extensive (almost 1,000,000 km2) and thick (up to 1500 m) tabular lava flows of Lower Cretaceous age occur, and are assigned to the ParanáeEtendeka Large Igneous Province (LIP). These flood basalts extruded onto the Paleozoic Paraná Basin (Serra Geral Formation), and extend underneath the adjacent ba- sins of the southern/southeastern margin (Thomaz Filho et al., 2000) where they constitute the economic basement of Santos (Camboriú Formation) and Campos (Cabiúnas Formation) Basins.
 Their continuation in onshore Namíbia constitutes the Etendeka flood basalts (Turner et al.,1994). This once continuous basaltic lava flows, in conjunction with the offshore magmatism associated with
 SDR wedges on the South American and African margins, was named South Atlantic LIP by Gladczenko et al. (1997) (Fig. 1). Over the past decades, several authors have highlighted the role
 that magmatism played in the formation of the South Atlantic, a theme that even nowadays has not reached a consensus, particu- larly regarding the temporal relationship and evolution of the volcanism since its inception in the pre-rift phase up to the final breakup of Gondwana, (e.g. Becker et al., 2012; Blaich et al., 2011; Franke, 2012; Mohriak et al., 2012; Moulin et al., 2010; Torsvik et al., 2010; Zalán et al., 2011), to cite only the most recent.
+
+
 
 Methods
 Another important issue concerning the extent of magmatism in the southeastern and southern Atlantic margins is the precise definition of the crustal boundary, especially with respect to con- tinental crustal thinning, to the transition of the continental crust into oceanic crust, and to the age of breakup. We can notice that this discussion is far from reaching
@@ -17,5 +20,7 @@ consensus when analyzing traditional works such as Mohriak et al. (2002, 2008) a
 ParanáeEtendeka LIP, as well as the marginal basins of southern/ southeastern Brazil (Pelotas, Santos, Campos and Espírito Santo Basins, Fig. 1). The total offshore area of the core of this study, the Pelotas Basin, is approximately 340,000 km2, bounded to the west by the coastline, to the east by the continental-oceanic crustal boundary (COB), to the north by the Florianópolis Fracture Zone (FFZ) and to the south by the Polônio High, in Uruguay (Fig. 1). Internally, it is divided by the Porto Alegre Lineament into two sub- basins: Northern sub-basin and Southern sub-basin (Bassetto et al., 2000; Bueno et al., 2007). In this paper, based on the interpretation of the rift architecture and of the crustal boundary we considered that the Chuí Lineament divides the Southern sub-basin into two parts.
 
 
+
+Discussion
 The work was carried out based mainly in the seismic inter-
 pretation of ultra-deep lines. Approximately 8000 linear kilometers of regional 2D seismic data shot by ION-GXT (Pelotas Span) in the Pelotas Basin were interpreted. These lines were time-migrated (PSTM) with 16 s of two-way travel time (twt), and depth migrated (PSDM) down to 40 km, both migrated by ION-GXT. Be- sides this seismic network in the Pelotas Basin, regional 2D and 3D seismic data in the Santos, Campos and Paraná Basins were used. Figure 1 shows the study area and the location of the sections analyzed in this article.
