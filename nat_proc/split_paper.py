@@ -92,6 +92,3 @@ def split_paper(text):
 
 	return  introOut, methOut, discOut
 
-
-
-print split_paper(text_split)
