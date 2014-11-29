@@ -7,4 +7,5 @@ def textChanger(pdfText, mostAuthor="", mostPaper="",extractOptions):
     if mostPaper:
         mostPaper = evaluator(paperCounter(pdfText))
     ex = extract(pdfText)
-    return ''.join([mostAuthor,mostPaper,ex])
+    #return ''.join([mostAuthor,mostPaper,ex])
+    return pdfText
