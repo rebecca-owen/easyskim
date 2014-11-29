@@ -1,0 +1,18 @@
+{
+  "name": "Mendeley Python Skeleton",
+  "description": "Skeleton Flask app that uses the Mendeley SDK",
+  "keywords": [
+    "mendeley",
+    "python",
+    "flask"
+  ],
+  "addons": [],
+  "env": {
+    "MENDELEY_CLIENT_ID": {
+      "description": "Mendeley client ID"
+    },
+    "MENDELEY_CLIENT_SECRET": {
+      "description": "Mendeley client secret"
+    }
+  }
+}
