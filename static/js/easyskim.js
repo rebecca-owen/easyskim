@@ -1,4 +1,4 @@
-$('.document').click(function() {
+$(".document").click(function() {
   request($(this).data("id"));
 });
 
@@ -12,7 +12,6 @@ function request(doc_id) {
       success: function(data) {
         var t = $.parseJSON(data);
         $('#summary').html(t['text']);
-        // handleData(data); 
       }
   });
 }
