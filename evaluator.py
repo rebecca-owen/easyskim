@@ -11,4 +11,3 @@ def paperCounter(bibliography):
     pass
 if __name__=="__main__":
     x = authorCounter(getBibliography(open("sample.txt").read()))
-    

@@ -7,8 +7,7 @@ def textChanger(pdfText, mostAuthor="", mostPaper="",extractOptions=["nltkalchem
     if mostPaper:
         mostPaper = evaluator(paperCounter(pdfText))
     ex = extract(pdfText,extractOptions)
-    #return ''.join([mostAuthor,mostPaper,ex])
-    return pdfText
+    return ex
 if __name__=="__main__":
     import codecs
     cleanText=codecs.open("sample.txt",encoding="utf-8").read()
