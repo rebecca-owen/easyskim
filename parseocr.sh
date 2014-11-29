@@ -9,16 +9,26 @@ pdftotext $1 input.txt
 
 meta=$(exiftool $1)
 
-author=$(echo "$meta" | grep Author)
-creator=$(echo "$meta" | grep Creator)
-title=$(echo "$meta" | grep Title)
-date=$(echo "$meta" | grep Create Date)
-publisher=$(echo "$meta" | grep Publisher)
-description=$(echo "$meta" | grep Description)
-issn=$(echo "$meta" | grep ISSN)
-doi=$(echo "$meta" | grep Doi)
+author=$(echo "$meta" | grep Author | sed 's/.*://')
+creator=$(echo "$meta" | grep Creator | sed 's/.*://' )
+title=$(echo "$meta" | grep Title | sed 's/.*://')
+date=$(echo "$meta" | grep Create | sed 's/Create Date//')
+publisher=$(echo "$meta" | grep Publisher | sed 's/.*://')
+description=$(echo "$meta" | grep Description | sed 's/.*://')
+issn=$(echo "$meta" | grep ISSN | sed 's/.*://')
+doi=$(echo "$meta" | grep Doi | sed 's/.*://')
 
-echo "$author \n$creator \n$title \n$date \n$publisher \n$description \n$issn \n$doi \n" > $1.meta
+metacsv=$(echo "{\"Author:\",\"$author\",\n
+\"Creator:\",\"$creator\",\n
+\"Title:\",\"$title\",\n
+\"Date:\",\"$date\",\n
+\"Publisher:\",\"$publisher\",\n
+\"Description:\",\"$description\",\n
+\"ISSN:\",\"$issn\",\n
+\"DOI:\",\"$doi\"}\n")
+
+
+echo "$metacsv" > $1.met
 
 # ASCII only filter
 tr -cd '\11\12\15\40-\176' < input.txt > input-ascii.txt
