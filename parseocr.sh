@@ -1,9 +1,24 @@
 #!/usr/bin/sh
 # Input arguments: <input.pdf> <spellcheck>
 #
-# Generates a parsed result input.txt
+# Generates read and parsed text output at - input.pdf.txt
+# Generates extracted metadata at - input.pdf.meta
 #
+
 pdftotext $1 input.txt
+
+meta=$(exiftool $1)
+
+author=$(echo "$meta" | grep Author)
+creator=$(echo "$meta" | grep Creator)
+title=$(echo "$meta" | grep Title)
+date=$(echo "$meta" | grep Create Date)
+publisher=$(echo "$meta" | grep Publisher)
+description=$(echo "$meta" | grep Description)
+issn=$(echo "$meta" | grep ISSN)
+doi=$(echo "$meta" | grep Doi)
+
+echo "$author \n$creator \n$title \n$date \n$publisher \n$description \n$issn \n$doi \n" > $1.meta
 
 # ASCII only filter
 tr -cd '\11\12\15\40-\176' < input.txt > input-ascii.txt
@@ -29,7 +44,6 @@ if [ "$2" = "spellcheck" ]
 	done
 
 fi
-
 
 line=$(echo "$line" | sed 's/^.\{,8\}$//') #Remove short random characters (upto 8) starting on e new line
 
