@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Mendeley Python Skeleton</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
 </head>
 
 <body>
@@ -10,11 +12,18 @@
 
 <h1>Hello, {{name}}!</h1>
 
-{% for doc in docs %}
-<p><strong>{{ doc.title }}</strong> - {{ doc.id }}</p>
-{% endfor %}
+<div id="documents">
+  {% for doc in docs %}
+    <a href="javascript:;" class="document" data-id="{{ doc.id }}"><strong>{{ doc.title }}</strong></a>
+    <br>
+    <br>
+  {% endfor %}
+</div>
+<div id="summary">
+  Summaries should show up here
+</div>
 
-
-
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/static/js/easyskim.js"></script>
 </body>
 </html>
