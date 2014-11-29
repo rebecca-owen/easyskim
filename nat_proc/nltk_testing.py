@@ -181,7 +181,20 @@ def split_paper(text):
 
 
 
-print split_paper(text_split)
+# print split_paper(text_split)
 
 
 
+def pre_clean(text):
+	sents = sent_tokenize(text)
+	out = []
+
+	for s in sents:
+		if ('E-mail address' and 'Email address' and 'Correspondence address') not in s:
+			out.append(s)
+
+	return ' '.join(out).encode('ascii', errors='backslashreplace')
+
+		
+
+print pre_clean(text_split)
