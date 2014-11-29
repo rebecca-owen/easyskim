@@ -16,11 +16,11 @@ options[3] is for nltk, and specifies..."""
     if "alchemy" in options[0]:
         product.append(alchemyExtract(cleanText,options))
     if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
+        print(options)
         raise Exception("No valid options selected. Please enter some combination of 'nltk','sections',and 'alchemy")
     return product
 
 def nlpExtract(cleanText,options):
-    print(len(cleanText))
     from sys import path
     path.append("/home/user/easyskim/nltk")
     import FrequencySummarizer
