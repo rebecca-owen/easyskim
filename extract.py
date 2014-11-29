@@ -22,9 +22,7 @@ options[3] is for nltk, and specifies..."""
     return product
 
 def nlpExtract(cleanText,options):
-    from sys import path
-    path.append("~/easyskim/nltk")
-    import FrequencySummarizer
+    from nat_proc import FrequencySummarizer
     f = FrequencySummarizer.FrequencySummarizer()
     try:
         options[3]=int(options[3])
@@ -45,8 +43,6 @@ def alchemyExtract(cleanText,options):
     except ValueError as e:
         print("You selected alchemy, and options[1] was not a valid integer.")
         raise e
-#    from sys import path
-#    path.append("/home/user/src/test/alchemyapi_python")
     from alchemyapi import AlchemyAPI
     alch = AlchemyAPI()
     response = alch.keywords('text',cleanText,{'sentiment':1})

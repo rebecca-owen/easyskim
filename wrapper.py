@@ -13,3 +13,4 @@ if __name__=="__main__":
     import codecs
     cleanText=codecs.open("sample.txt",encoding="utf-8").read()
     #textChanger()
+

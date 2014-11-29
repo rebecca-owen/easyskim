@@ -10,6 +10,9 @@ from mendeley import Mendeley
 from mendeley.session import MendeleySession
 from werkzeug.contrib.fixers import ProxyFix
 
+import wrapper
+import codecs
+
 
 client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
@@ -55,7 +58,12 @@ def home():
     name = mendeley_session.profiles.me.display_name
     docs = []
     for document in mendeley_session.documents.iter():
-        docs.append({'title': document.title, 'id': document.id})
+        docs.append(
+            {
+                'title': document.title,
+                'id': document.id,
+                'names': ['%s, %s' % (x.last_name, x.first_name) for x in document.authors]
+            })
 
     # print convertToTxt(getPdf(mendeley_session, docs[0]['id']))
 
@@ -73,8 +81,12 @@ def document():
 
     mendeley_session = get_session_from_cookies()
 
+    print 'requested'
     doc_id = request.form['doc_id']
-    text = convertToTxt(getPdf(mendeley_session, doc_id))
+    # text = convertToTxt(getPdf(mendeley_session, doc_id))
+    raw_text = convertToTxt(getPdf(mendeley_session, doc_id))
+    text = wrapper.textChanger(textToEncoded(raw_text))
+    info = getInfo(mendeley_session, doc_id)
     final_text = '<pre>%s</pre>' % text
     return json.dumps({ "text": final_text }), 200
 
@@ -88,6 +100,9 @@ def logout():
     session.pop('token', None)
     return redirect('/')
 
+# def get_authors():
+
+
 def get_mendeley_config():
     scheme, netloc, path, query_string, fragment = urlsplit(request.url)
     redirect_url = urlunsplit((scheme, netloc, '/oauth', '', ''))
@@ -96,6 +111,20 @@ def get_mendeley_config():
 
 def get_session_from_cookies():
     return MendeleySession(get_mendeley_config(), session['token'])
+
+def getInfo(session, doc_id):
+    """Get info from Mendeley document id
+    Returns info dict
+    """
+    doc = session.documents.get(doc_id)
+
+    doc_url = doc.files.list().items[0].download_url
+
+    f = tempfile.NamedTemporaryFile(delete=False)
+    f.write(urllib.urlopen(doc_url).read())
+    f.close()
+
+    return f
 
 def getPdf(session, doc_id):
     """Get pdf from Mendeley document id
@@ -117,6 +146,13 @@ def convertToTxt(pdf):
     os.unlink(pdf.name)
     return text
 
+def textToEncoded(text):
+
+    with tempfile.NamedTemporaryFile() as temp:
+        temp.write(text)
+        clean = codecs.open(temp.name,encoding="utf-8").read()
+
+    return clean
 
 if __name__ == '__main__':
     app.run()
