@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 # Input arguments: <input.pdf> <spellcheck>
 #
 # Generates read and parsed text output at - input.pdf.txt
@@ -12,20 +12,20 @@ meta=$(exiftool $1)
 author=$(echo "$meta" | grep Author | sed 's/.*://')
 creator=$(echo "$meta" | grep Creator | sed 's/.*://' )
 title=$(echo "$meta" | grep Title | sed 's/.*://')
-date=$(echo "$meta" | grep Create | sed 's/Create Date *://')
+date=$(echo "$meta" | grep Create | sed 's/Create Date//')
 publisher=$(echo "$meta" | grep Publisher | sed 's/.*://')
 description=$(echo "$meta" | grep Description | sed 's/.*://')
 issn=$(echo "$meta" | grep ISSN | sed 's/.*://')
 doi=$(echo "$meta" | grep Doi | sed 's/.*://')
 
-metacsv=$(echo "{\"Author:\",\"$author\",\n
-\"Creator:\",\"$creator\",\n
-\"Title:\",\"$title\",\n
-\"Date:\",\"$date\",\n
-\"Publisher:\",\"$publisher\",\n
-\"Description:\",\"$description\",\n
-\"ISSN:\",\"$issn\",\n
-\"DOI:\",\"$doi\"}\n")
+metacsv=$(echo "{\"Author\":\"$author\",\n
+\"Creator\":\"$creator\",\n
+\"Title\":\"$title\",\n
+\"Date\":\"$date\",\n
+\"Publisher\":\"$publisher\",\n
+\"Description\":\"$description\",\n
+\"ISSN\":\"$issn\",\n
+\"DOI\":\"$doi\"}\n")
 
 
 echo "$metacsv" > $1.met
@@ -68,7 +68,9 @@ line=$(echo "$line" | sed 's/(.*)//') # Remove short stuff between brackets ()
 line=$(echo "$line" | sed 's/Page//') # Remove Page
 #line=$(echo "$line" | sed 's/page//')
 
-echo "$line" > "$1".txt
+echo "$line" #> "$1".txt
+
+rm input.txt
 
 # Useful Trash
 #line=$(sed 's/298/ /' $1 ) # Remove unnecessary stuff from heading
