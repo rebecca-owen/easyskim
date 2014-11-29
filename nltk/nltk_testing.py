@@ -65,51 +65,54 @@ class FrequencySummarizer:
 
 
 """Apply to file"""
-import codecs
+# import codecs
 
-f = codecs.open('test_intro.txt', encoding='utf-8')
-raw = f.read()
-raw = re.sub(r'\(.*?\)\s*', '', raw)
-raw = re.sub(r'\[.*?\]\s*', '', raw)
-raw = re.sub('- ', '', raw)
-raw = re.sub(', ,', ',', raw)
-
-
-fs = FrequencySummarizer()
-
-out = fs.summarize(raw, 3)
-for l in out:
-  print l + "\n"
+# f = codecs.open('test_intro.txt', encoding='utf-8')
+# raw = f.read()
+# raw = re.sub(r'\(.*?\)\s*', '', raw)
+# raw = re.sub(r'\[.*?\]\s*', '', raw)
+# raw = re.sub('- ', '', raw)
+# raw = re.sub(', ,', ',', raw)
 
 
-# text_utf = open('test_intro.txt')
-# text_split = text_utf.read()
+# fs = FrequencySummarizer()
 
-# def split_paper(text):
-#   """
-#   Takes raw text file and splits into a list of strings 
-#   at each occurence of three or more carriage returns
-#   """
-#   introText =[]
-#   methText =[]
-#   discText = []
-#   chunk =[]
-#   spl = "\n\n\n"
-#   new = text.split(spl)
-#   for i in new:
-#     chunk.append(i)
+# out = fs.summarize(raw, 3)
+# for l in out:
+#   print l + "\n"
 
-#   for text in chunk:
-#     wordList = word_tokenize(text.lower())
-#     for i in wordList[0:10]:
-#       if i == 'introduction':
-#         introText.append(text)
-#       if i=='method' or i=='methods':
-#         methText.append(text)
-#       if i=='discussion' or i=='conclusions':
-#         discText.append(text)
 
-#   return introText, methText, discText
+text_utf = open('test_intro.txt')
+text_split = text_utf.read()
 
-# print split_paper(text_split)
+def split_paper(text):
+  """
+  Takes raw text file and splits into a list of strings 
+  at each occurence of three or more carriage returns
+
+  At present, may only pick first paragraph of each section depending on how many \n
+  """
+  introText =[]
+  methText =[]
+  discText = []
+  chunk =[]
+  spl = "\n\n"
+  new = text.split(spl)
+  for i in new:
+    chunk.append(i)
+
+
+  for text in chunk:
+    wordList = word_tokenize(text.lower())
+    for i in wordList[0:10]:
+      if i == 'introduction':
+        introText.append(text)
+      elif i=='method' or i=='methods':
+        methText.append(text)
+      elif i=='discussion' or i=='conclusions':
+        discText.append(text)
+
+  return introText[0],methText[0], discText[0]
+
+print split_paper(text_split)
 
