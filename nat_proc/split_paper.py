@@ -9,13 +9,23 @@ def split_paper(text):
 	methText =[]
 	discText = []
 	chunk =[]
+	paras = []
 	spl = "\n\n"
 	new = text.split(spl)
 	for i in new:
 		chunk.append(i)
 
+	""" Strip out identical chunks which may 
+	be remnant footer or header """
 
-	for text in chunk:
+	for i in chunk:
+		if i not in paras:
+			paras.append(i)
+			print i + "\n"
+
+	""" Split based on header terms by word tokens """
+
+	for text in paras:
 		wordList = word_tokenize(text.lower())
 
 		for i in wordList:
@@ -38,6 +48,5 @@ def split_paper(text):
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
 		discOut = []
-
 
 	return introOut, methOut, discOut
