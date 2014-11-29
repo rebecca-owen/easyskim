@@ -17,6 +17,7 @@ options[3] is for nltk, and specifies..."""
         product.append(alchemyExtract(cleanText,options))
     if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
         raise Exception("No valid options selected. Please enter some combination of 'nltk','sections',and 'alchemy")
+    print(product)
 
 def nlpExtract(cleanText,options):
     print(len(cleanText))
