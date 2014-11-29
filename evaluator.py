@@ -1,11 +1,14 @@
+import re
 def evaluator():
     pass
 def getBibliography(pdfText):
     possibilities = "(BIBLIOGRAPHY)|(Bibliography)|(References)|(REFERENCES)"
-    from re import sub
     #bibliography = re.sub("".join([".*",possibilities]),"",pdfText))
-    return sub("".join([".*",possibilities]),"",pdfText)
-def authorCounter(pdfText):
+    return re.sub("".join([".*",possibilities]),"",pdfText)
+def authorCounter(bibliography):
+    return re.findall("\\n[A-Z][\w]*, [A-Z][\w]*", bibliography)
+def paperCounter(bibliography):
     pass
-def paperCounter(pdfText):
-    pass
+if __name__=="__main__":
+    x = authorCounter(getBibliography(open("sample.txt").read()))
+    
