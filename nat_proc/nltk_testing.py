@@ -4,6 +4,7 @@ from collections import defaultdict
 from string import punctuation
 from heapq import nlargest
 import re
+import codecs
 
 """
 Modified from http://glowingpython.blogspot.co.uk/2014/09/text-summarization-with-nltk.html
@@ -44,6 +45,7 @@ class FrequencySummarizer:
 			Return a list of n sentences 
 			which represent the summary of text.
 		"""
+		text = unicode(text)
 		sents = sent_tokenize(text)
 		assert n <= len(sents)
 		word_tk = [word_tokenize(s.lower()) for s in sents]
@@ -62,28 +64,6 @@ class FrequencySummarizer:
 
 
 
-
-
-"""Apply to file"""
-# import codecs
-
-# f = codecs.open('test_intro.txt', encoding='utf-8')
-# raw = f.read()
-# raw = re.sub(r'\(.*?\)\s*', '', raw)
-# raw = re.sub(r'\[.*?\]\s*', '', raw)
-# raw = re.sub('- ', '', raw)
-# raw = re.sub(', ,', ',', raw)
-
-
-# fs = FrequencySummarizer()
-
-# out = fs.summarize(raw, 3)
-# for l in out:
-#   print l + "\n"
-
-
-text_utf = open('../test.pdf.txt')
-text_split = text_utf.read()
 
 def is_number(s):
     try:
@@ -181,20 +161,71 @@ def split_paper(text):
 
 
 
-# print split_paper(text_split)
+
+""""""""""""""""""
 
 
 
-def pre_clean(text):
-	sents = sent_tokenize(text)
-	out = []
 
-	for s in sents:
-		if ('E-mail address' and 'Email address' and 'Correspondence address') not in s:
-			out.append(s)
 
-	return ' '.join(out).encode('ascii', errors='backslashreplace')
+
+
+
+
+""""""""""""""""""""
+
+
+
+
+"""Apply to file"""
+import codecs
+
+# f = codecs.open('test_intro.txt', encoding='utf-8')
+# raw = f.read()
+
+# # print type(raw)
+# # raw = re.sub(r'\(.*?\)\s*', '', raw)
+# # raw = re.sub(r'\[.*?\]\s*', '', raw)
+# # raw = re.sub('- ', '', raw)
+# # raw = re.sub(', ,', ',', raw)
+
+
+# fs = FrequencySummarizer()
+# out = fs.summarize(raw, 3)
+# for l in out:
+#   print l + "\n"
+
+
+
+text_utf = open('../test.pdf.txt')
+text_split = text_utf.read()
+
+out = split_paper(text_split)
+fs = FrequencySummarizer()
+
+for t in out:
+	if t:
+		data = fs.summarize(t,1)
+		print data
+
+# fs = FrequencySummarizer()
+
+# out = fs.summarize(raw, 3)
+# for l in out:
+#   print l + "\n"
+
+
+
+# def pre_clean(text):
+# 	sents = sent_tokenize(text)
+# 	out = []
+
+# 	for s in sents:
+# 		if ('E-mail address' and 'Email address' and 'Correspondence address') not in s:
+# 			out.append(s)
+
+# 	return ' '.join(out).encode('ascii', errors='backslashreplace')
 
 		
 
-print pre_clean(text_split)
+# print pre_clean(text_split)

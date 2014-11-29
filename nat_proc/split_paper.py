@@ -13,10 +13,12 @@ def split_paper(text):
 
 	from nltk.tokenize import sent_tokenize,word_tokenize
 
-	
+
 	"""
 	Takes raw text file and splits into a list of strings 
 	at each occurence of three or more carriage returns
+
+	Needs heading-less fallback!!!
 	"""
 	introText =[]
 	methText =[]

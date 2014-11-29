@@ -44,6 +44,7 @@ class FrequencySummarizer:
       Return a list of n sentences 
       which represent the summary of text.
     """
+    text = unicode(text)
     sents = sent_tokenize(text)
     assert n <= len(sents)
     word_tk = [word_tokenize(s.lower()) for s in sents]
