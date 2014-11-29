@@ -54,7 +54,7 @@ class FrequencySummarizer:
         if w in self._freq and len(w)>4:  #Only count words of length>4 as significant
           ranking[i] += self._freq[w]
     sentsindx = self._rank(ranking, n)    
-    return [sents[j] for j in sentsindx]
+    return [sents[j].encode('ascii', errors='backslashreplace')  for j in sentsindx]
 
   def _rank(self, ranking, n):
     """ return the first n sentences with highest ranking """
@@ -75,42 +75,41 @@ raw = re.sub('- ', '', raw)
 raw = re.sub(', ,', ',', raw)
 
 
-# fs = FrequencySummarizer()
+fs = FrequencySummarizer()
 
-# out = fs.summarize(raw, 3)
-# for l in out:
-#   clip = l.encode('ascii', errors='backslashreplace') 
-#   print clip + "\n"
+out = fs.summarize(raw, 3)
+for l in out:
+  print l + "\n"
 
 
-text_utf = open('test_intro.txt')
-text_split = text_utf.read()
+# text_utf = open('test_intro.txt')
+# text_split = text_utf.read()
 
-def split_paper(text):
-  """
-  Takes raw text file and splits into a list of strings 
-  at each occurence of three or more carriage returns
-  """
-  introText =[]
-  methText =[]
-  discText = []
-  chunk =[]
-  spl = "\n\n\n"
-  new = text.split(spl)
-  for i in new:
-    chunk.append(i)
+# def split_paper(text):
+#   """
+#   Takes raw text file and splits into a list of strings 
+#   at each occurence of three or more carriage returns
+#   """
+#   introText =[]
+#   methText =[]
+#   discText = []
+#   chunk =[]
+#   spl = "\n\n\n"
+#   new = text.split(spl)
+#   for i in new:
+#     chunk.append(i)
 
-  for text in chunk:
-    wordList = word_tokenize(text.lower())
-    for i in wordList[0:10]:
-      if i == 'introduction':
-        introText.append(text)
-      if i=='method' or i=='methods':
-        methText.append(text)
-      if i=='discussion' or i=='conclusions':
-        discText.append(text)
+#   for text in chunk:
+#     wordList = word_tokenize(text.lower())
+#     for i in wordList[0:10]:
+#       if i == 'introduction':
+#         introText.append(text)
+#       if i=='method' or i=='methods':
+#         methText.append(text)
+#       if i=='discussion' or i=='conclusions':
+#         discText.append(text)
 
-  return introText, methText, discText
+#   return introText, methText, discText
 
-print split_paper(text_split)
+# print split_paper(text_split)
 
