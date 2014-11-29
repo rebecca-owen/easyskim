@@ -77,7 +77,7 @@ def seperateSections(cleanText,options):
     return best
 
 if __name__ == '__main__':
-    cleanText=open("/home/user/Downloads/media/articles/oxford/polsoc/storage.txt").read()
+    cleanText=open("sample.txt").read()
     ex = extract(cleanText,['alchemy',5])
     #print(ex)
     print(seperateSections(cleanText,""))
