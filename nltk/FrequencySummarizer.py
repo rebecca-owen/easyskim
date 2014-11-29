@@ -54,7 +54,7 @@ class FrequencySummarizer:
         if w in self._freq and len(w)>4:  #Only count words of length>4 as significant
           ranking[i] += self._freq[w]
     sentsindx = self._rank(ranking, n)    
-    return [sents[j] for j in sentsindx]
+    return [sents[j].encode('ascii', errors='backslashreplace')  for j in sentsindx]
 
   def _rank(self, ranking, n):
     """ return the first n sentences with highest ranking """

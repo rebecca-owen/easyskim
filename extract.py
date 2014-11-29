@@ -17,6 +17,22 @@ options[3] is for nltk, and specifies..."""
         product.append(alchemyExtract(cleanText,options))
     if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
         raise Exception("No valid options selected. Please enter some combination of 'nltk','sections',and 'alchemy")
+    print(product)
+
+def nlpExtract(cleanText,options):
+    print(len(cleanText))
+    from sys import path
+    path.append("/home/user/easyskim/nltk")
+    import FrequencySummarizer
+    f = FrequencySummarizer.FrequencySummarizer()
+    try:
+        options[3]=int(options[3])
+    except IndexError as e:
+        options[3]=5
+    except ValueError as e:
+        print("You selected nltk, and options[3] was not a valid integer.")
+        raise e
+    return f.summarize(cleanText,options[3])
 
 def alchemyExtract(cleanText,options):
     """In this case,options[1] should specify the number of keywords to be used. Default to 4."""
@@ -77,7 +93,9 @@ def seperateSections(cleanText,options):
     return best
 
 if __name__ == '__main__':
-    cleanText=open("sample.txt").read()
+    import codecs
+    cleanText=codecs.open("sample.txt",encoding="utf-8").read()
     ex = extract(cleanText,['alchemy',5])
     #print(ex)
-    print(seperateSections(cleanText,""))
+#    print(seperateSections(cleanText,""))
+    print(extract(cleanText,['nltk','','',3]))

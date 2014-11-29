@@ -54,7 +54,7 @@ class FrequencySummarizer:
         if w in self._freq and len(w)>4:  #Only count words of length>4 as significant
           ranking[i] += self._freq[w]
     sentsindx = self._rank(ranking, n)    
-    return [sents[j] for j in sentsindx]
+    return [sents[j].encode('ascii', errors='backslashreplace')  for j in sentsindx]
 
   def _rank(self, ranking, n):
     """ return the first n sentences with highest ranking """
@@ -65,22 +65,21 @@ class FrequencySummarizer:
 
 
 """Apply to file"""
-import codecs
+# import codecs
 
-f = codecs.open('test_intro.txt', encoding='utf-8')
-raw = f.read()
-raw = re.sub(r'\(.*?\)\s*', '', raw)
-raw = re.sub(r'\[.*?\]\s*', '', raw)
-raw = re.sub('- ', '', raw)
-raw = re.sub(', ,', ',', raw)
+# f = codecs.open('test_intro.txt', encoding='utf-8')
+# raw = f.read()
+# raw = re.sub(r'\(.*?\)\s*', '', raw)
+# raw = re.sub(r'\[.*?\]\s*', '', raw)
+# raw = re.sub('- ', '', raw)
+# raw = re.sub(', ,', ',', raw)
 
 
 # fs = FrequencySummarizer()
 
 # out = fs.summarize(raw, 3)
 # for l in out:
-#   clip = l.encode('ascii', errors='backslashreplace') 
-#   print clip + "\n"
+#   print l + "\n"
 
 
 text_utf = open('test_intro.txt')
@@ -90,15 +89,30 @@ def split_paper(text):
   """
   Takes raw text file and splits into a list of strings 
   at each occurence of three or more carriage returns
-  """
 
+  At present, may only pick first paragraph of each section depending on how many \n
+  """
+  introText =[]
+  methText =[]
+  discText = []
   chunk =[]
-  spl = "\n\n\n"
+  spl = "\n\n"
   new = text.split(spl)
   for i in new:
     chunk.append(i)
 
-  return chunk
+
+  for text in chunk:
+    wordList = word_tokenize(text.lower())
+    for i in wordList[0:10]:
+      if i == 'introduction':
+        introText.append(text)
+      elif i=='method' or i=='methods':
+        methText.append(text)
+      elif i=='discussion' or i=='conclusions':
+        discText.append(text)
+
+  return introText[0],methText[0], discText[0]
 
 print split_paper(text_split)
 
