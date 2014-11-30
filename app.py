@@ -14,8 +14,6 @@ import wrapper
 import codecs
 
 import jinja_filters
-import re
-
 
 
 client_id = os.environ['MENDELEY_CLIENT_ID']
@@ -114,9 +112,7 @@ def uploaded_file():
         f.close()
         raw_text, metadata = convertToTxt(f)
         text = wrapper.textChanger(textToEncoded(raw_text))
-        final_text = '<pre>%s</pre>' % text
-        print final_text
-        return json.dumps({ "text": final_text, "meta": metadata }), 200
+        return json.dumps({ "text": text, "meta": metadata }), 200
     return json.dumps({ "error": "not valid file" }), 500
 
 def get_mendeley_config():
@@ -174,9 +170,6 @@ def textToEncoded(text):
         clean = codecs.open(temp.name,encoding="utf-8").read()
 
     return clean
-
-def removeUnwantedSpaces(text):
-    pass
 
 if __name__ == '__main__':
     app.run()

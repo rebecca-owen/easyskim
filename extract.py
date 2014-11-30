@@ -1,3 +1,5 @@
+import re
+
 introMarkers = ["Introduction:","Beginning","Literature Review","1."]
 endMarkers = ["Results","Conclusion"]
 bibMarkers = ["References", "Bibliography","Citations"]
@@ -46,13 +48,13 @@ def nlpExtract(cleanText,options):
     newstring = ""
 
     if  "EMPTY" not in final[0]:
-        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + " ".join(final[0]) + "</p>"])
+        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + removeUnwantedSpaces(" ".join(final[0])) + "</p>"])
     if  "EMPTY" not in final[1]:
-        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + " ".join(final[1]) + "</p>"])
+        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[1])) + "</p>"])
     if  "EMPTY" not in final[2]:
-        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + " ".join(final[2]) + "</p>"])
+        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[2])) + "</p>"])
     if  "EMPTY" not in final[3]:
-        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + " ".join(final[3]) + "</p>"])
+        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[3])) + "</p>"])
 
     return newstring
 
@@ -77,6 +79,13 @@ def alchemyExtract(cleanText,options):
     else:
         finalKeywords = rKeywords
     return "\n\nKeywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
+
+
+def removeUnwantedSpaces(text):
+    text = re.sub(' \.', '.', text)
+    text = re.sub(' \,', ',', text)
+    text = re.sub(' \;', ';', text)
+    return text
 
 if __name__ == '__main__':
     import codecs
