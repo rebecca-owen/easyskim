@@ -39,39 +39,44 @@ mv input-ascii.txt input.txt
 #wordMask=$(spell input.txt)
 
 line=$(cat input.txt)
-
-if [ "$2" = "spellcheck" ]
-
+uname=$(uname)
+if [ $uname != "Darwin" ]
 	then
-	echo "Performing spell check..."
 
-	for i in $wordMask
-	do
-   # do whatever on $i
+	if [ "$2" = "spellcheck" ]
 
-	#echo "$i"
+		then
+		echo "Performing spell check..."
 
-	line=$(echo "$line" | sed 's/'$i'/ /')
-	#echo "test"
-	done
+		for i in $wordMask
+		do
+	   # do whatever on $i
+
+		#echo "$i"
+
+		line=$(echo "$line" | sed 's/'$i'/ /')
+		#echo "test"
+		done
+
+	fi
+
+	line=$(echo "$line" | sed 's/^.\{,8\}$//') #Remove short random characters (upto 8) starting on e new line
+
+	line=$(echo "$line" | sed 'N;/^\n$/d;P;D') # Remove blank lines and leave a single line
+
+	line=$(echo "$line" | sed '/^[0-9][0-9]*$/d') # Remove lines starting with single/few numbers
+
+	line=$(echo "$line" | sed 's/(.*)//') # Remove short stuff between brackets ()
+
+	line=$(echo "$line" | sed 's/.*address.*//') # Remove lines with address in them i.e. e-mail address
+
+
+	#line=$(echo "$line" | sed -i '/^.$/d')
+
+	line=$(echo "$line" | sed 's/Page//') # Remove Page
+	line=$(echo "$line" | sed 's/page//')
 
 fi
-
-line=$(echo "$line" | sed 's/^.\{,8\}$//') #Remove short random characters (upto 8) starting on e new line
-
-line=$(echo "$line" | sed 'N;/^\n$/d;P;D') # Remove blank lines and leave a single line
-
-line=$(echo "$line" | sed '/^[0-9][0-9]*$/d') # Remove lines starting with single/few numbers
-
-line=$(echo "$line" | sed 's/(.*)//') # Remove short stuff between brackets ()
-
-line=$(echo "$line" | sed 's/.*address.*//') # Remove lines with address in them i.e. e-mail address
-
-
-#line=$(echo "$line" | sed -i '/^.$/d')
-
-line=$(echo "$line" | sed 's/Page//') # Remove Page
-#line=$(echo "$line" | sed 's/page//')
 
 echo "$line" #> "$1".txt
 
