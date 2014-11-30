@@ -232,9 +232,13 @@ t = split_paper(text_split)
 f = FrequencySummarizer()
 
 final = []
+sent = []
 for te in out:
 	if te:
-		final.append(f.summarize(te,5)) 
+		dat = f.summarize(te,5)
+		for sent in dat:
+			sent.encode('ascii', errors='backslashreplace') 
+		final.append(' '.join(sent))
 	elif not te:
 		final.append("EMPTY")
 
