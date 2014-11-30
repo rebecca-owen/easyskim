@@ -91,6 +91,6 @@ if __name__ == '__main__':
     import codecs
     cleanText=codecs.open("test.pdf.txt",encoding="utf-8").read()
     ex = extract(cleanText,['alchemy',5])
-    print(ex)
+    print(ex.replace('\n', ' '))
     ex = extract(cleanText,['nltk','','',3])
-    print(ex)
+    print(ex.replace('\n', ' '))
