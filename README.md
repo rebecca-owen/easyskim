@@ -19,3 +19,27 @@ Twitter: [@easyskim](https://twitter.com/easyskim)
 Email us: [admin@easyskim.co.uk](mailto:admin@easyskim.co.uk)
 
 <i>Apache Licence Version 2.0</i>
+
+
+### Installation
+Installation requires Python 2.7+ and pip. Mendeley Client ID and Secret can be obtained from [Mendeley Dev](http://dev.mendeley.com/) and must be exported as variables before launching the app.
+
+
+```
+git clone https://github.com/rebeccamorgan/easyskim.git
+cd easyskim
+
+pip install -r requirements.txt
+
+export MENDELEY_CLIENT_ID= < >
+export MENDELEY_CLIENT_SECRET= < >
+
+```
+
+### Use
+
+```
+python app.py
+```
+
+Visit the localhost address e.g. ```localhost:5000``` in your browser to use the app.
