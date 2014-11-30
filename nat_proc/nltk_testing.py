@@ -144,10 +144,11 @@ def split_paper(text):
 
 
 
+
 	if introText:
 		introOut = introText[0].encode('ascii', errors='backslashreplace')
 	else:
-		introOut = []
+		introOut = sects[0:2]
 	if methText:
 		methOut = methText[0].encode('ascii', errors='backslashreplace')
 	else:
@@ -155,11 +156,27 @@ def split_paper(text):
 	if discText:
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
-		discOut = []
+		discOut = sects[-1:]
 
 	return  introOut, methOut, discOut
 
 
+
+def pre_clean(text):
+
+	text = re.sub(r'\[.*?\]\s*', '', text)
+	text = re.sub(r'\(.*?\)\s*', '', text)
+	text = re.sub('- ', '', text)
+	text = re.sub(', ,', ',', text)
+
+	# sents = sent_tokenize(text)
+	# out = []
+
+	# for s in sents:
+	# 	if s.find('E-mail') == -1 and s.find('http') == -1 and s.find("Current\ address") == -1 and s.find("Corresponding\ author") == -1 and s.find("Published\ by") == -1:
+	# 		out.append(s)
+
+	return text
 
 
 """"""""""""""""""
@@ -180,8 +197,6 @@ def split_paper(text):
 """Apply to file"""
 import codecs
 
-# f = codecs.open('test_intro.txt', encoding='utf-8')
-# raw = f.read()
 
 # # print type(raw)
 # # raw = re.sub(r'\(.*?\)\s*', '', raw)
@@ -197,41 +212,21 @@ import codecs
 
 
 
-text_utf = open('../test.pdf.txt')
+text_utf = codecs.open('../test.pdf.txt', encoding='utf-8')
 text_split = text_utf.read()
 
-# out = split_paper(text_split)
-# fs = FrequencySummarizer()
+inp = pre_clean(text_split)
+out = split_paper(inp)
+fs = FrequencySummarizer()
 
-# for t in out:
-# 	if t:
-# 		data = fs.summarize(t,3)
-# 		print data
-
-# fs = FrequencySummarizer()
-
-# out = fs.summarize(raw, 3)
-# for l in out:
-#   print l + "\n"
+for t in out:
+	if t:
+		data = fs.summarize(t,1)
+		print data
 
 
 
-def pre_clean(text):
 
-	text = re.sub(r'\[.*?\]\s*', '', text)
-	text = re.sub(r'\(.*?\)\s*', '', text)
-	text = re.sub('- ', '', text)
-	text = re.sub(', ,', ',', text)
 
-	sents = sent_tokenize(text)
-	out = []
-
-	for s in sents:
-		if s.find('E-mail') == -1 and s.find('http') == -1 and s.find("Current\ address") == -1 and s.find("Corresponding\ author") == -1 and s.find("Published\ by") == -1:
-			out.append(s)
-
-	return ' '.join(out).encode('ascii', errors='backslashreplace')
 
 		
-
-print pre_clean(text_split)
