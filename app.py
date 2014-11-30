@@ -9,7 +9,6 @@ from flask import Flask, redirect, render_template, request, session
 from mendeley import Mendeley
 from mendeley.session import MendeleySession
 from werkzeug.contrib.fixers import ProxyFix
-#from flask_sslify import SSLify
 
 import wrapper
 import codecs
@@ -29,7 +28,6 @@ client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
 
 app = Flask(__name__)
-#sslify = SSLify(app)
 app.jinja_env.filters['authors'] = jinja_filters.authors
 app.debug = True
 app.secret_key = client_secret
@@ -38,15 +36,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route('/')
 def login():
-    if 'token' in session:
-        return redirect('/home')
-
-    mendeley = get_mendeley_config()
-    auth = mendeley.start_authorization_code_flow()
-
-    session['state'] = auth.state
-
-    return render_template('login.html', login_url=(auth.get_login_url()))
+    return render_template('login.html')
 
 
 @app.route('/oauth')
@@ -63,33 +53,36 @@ def oauth():
 
 @app.route('/home')
 def home():
-    if 'token' not in session:
-        return redirect('/')
+    if 'token' in session:
+        # return redirect('/')
 
-    mendeley_session = get_session_from_cookies()
+        mendeley_session = get_session_from_cookies()
 
-    name = mendeley_session.profiles.me.display_name
-    docs = []
-    if mendeley_session.documents:
-        for document in mendeley_session.documents.iter():
-            temp_dict = {
-                    'title': document.title,
-                    'id': document.id,
-                }
-            if document.authors:
-                temp_dict['names'] = ['%s, %s' % (x.last_name, x.first_name) for x in document.authors]
-            else:
-                temp_dict['names'] = []
-            docs.append(temp_dict)
+        name = mendeley_session.profiles.me.display_name
+        docs = []
+        if mendeley_session.documents:
+            for document in mendeley_session.documents.iter():
+                temp_dict = {
+                        'title': document.title,
+                        'id': document.id,
+                    }
+                if document.authors:
+                    temp_dict['names'] = ['%s, %s' % (x.last_name, x.first_name) for x in document.authors]
+                else:
+                    temp_dict['names'] = []
+                docs.append(temp_dict)
 
+        context = {
+            'name' : mendeley_session.profiles.me.display_name,
+            'docs': docs[:5],
+            'logged_in': True
+        }
+    else:
+        mendeley = get_mendeley_config()
+        auth = mendeley.start_authorization_code_flow()
+        session['state'] = auth.state
 
-    # print convertToTxt(getPdf(mendeley_session, docs[0]['id']))
-
-    context = {
-        'name' : mendeley_session.profiles.me.display_name,
-        'docs': docs[:5]
-    }
-
+        context = {'login_url':auth.get_login_url()}
     return render_template('home.html', **context)
 
 @app.route('/document', methods=['POST'])
@@ -102,11 +95,6 @@ def document():
     doc_id = request.form['doc_id']
     raw_text, metadata = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
-    # print "metadata: " + metadata
-    # meta = getMeta(mendeley_session, metadata)
-
-
-    # info = getInfo(mendeley_session, doc_id)
 
     return json.dumps({ "text": text }), 200
 
@@ -130,7 +118,7 @@ def static_proxy(path):
 @app.route('/logout')
 def logout():
     session.pop('token', None)
-    return redirect('/')
+    return redirect('/home')
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] == 'pdf'
@@ -156,19 +144,6 @@ def get_mendeley_config():
 def get_session_from_cookies():
     return MendeleySession(get_mendeley_config(), session['token'])
 
-# def getInfo(session, doc_id):
-#     """Get info from Mendeley document id
-#     Returns info dict
-#     """
-#     doc = session.documents.get(doc_id)
-
-#     doc_url = doc.files.list().items[0].download_url
-
-#     f = tempfile.NamedTemporaryFile(delete=False)
-#     f.write(urllib.urlopen(doc_url).read())
-#     f.close()
-
-#     return f
 
 def getPdf(session, doc_id):
     """Get pdf from Mendeley document id
