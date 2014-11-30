@@ -46,7 +46,8 @@ class FrequencySummarizer:
     """
     text = unicode(text)
     sents = sent_tokenize(text)
-    assert n <= len(sents)
+    if n > len(sents):
+      n = len(sents)
     word_tk = [word_tokenize(s.lower()) for s in sents]
     self._freq = self._compute_frequencies(word_tk)
     ranking = defaultdict(int)
