@@ -200,13 +200,13 @@ import codecs
 text_utf = open('../test.pdf.txt')
 text_split = text_utf.read()
 
-out = split_paper(text_split)
-fs = FrequencySummarizer()
+# out = split_paper(text_split)
+# fs = FrequencySummarizer()
 
-for t in out:
-	if t:
-		data = fs.summarize(t,1)
-		print data
+# for t in out:
+# 	if t:
+# 		data = fs.summarize(t,3)
+# 		print data
 
 # fs = FrequencySummarizer()
 
@@ -216,16 +216,22 @@ for t in out:
 
 
 
-# def pre_clean(text):
-# 	sents = sent_tokenize(text)
-# 	out = []
+def pre_clean(text):
 
-# 	for s in sents:
-# 		if ('E-mail address' and 'Email address' and 'Correspondence address') not in s:
-# 			out.append(s)
+	text = re.sub(r'\[.*?\]\s*', '', text)
+	text = re.sub(r'\(.*?\)\s*', '', text)
+	text = re.sub('- ', '', text)
+	text = re.sub(', ,', ',', text)
 
-# 	return ' '.join(out).encode('ascii', errors='backslashreplace')
+	sents = sent_tokenize(text)
+	out = []
+
+	for s in sents:
+		if s.find('E-mail') == -1 and s.find('http') == -1 and s.find("Current\ address") == -1 and s.find("Corresponding\ author") == -1 and s.find("Published\ by") == -1:
+			out.append(s)
+
+	return ' '.join(out).encode('ascii', errors='backslashreplace')
 
 		
 
-# print pre_clean(text_split)
+print pre_clean(text_split)
