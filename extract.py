@@ -8,18 +8,16 @@ options[0] specifies which analysis will be run.
 options[1] is for alchemy, and specifies how many keywords will be returned.
 options[2] is for sectionExtract, and specifies...
 options[3] is for nltk, and specifies..."""
-    product = []
+    newstring=""
     if "nltk" in options[0]:
-        product.append(nlpExtract(cleanText,options))
-    if "sections" in options[0]:
-        product.append(sectionExtract(cleanText,options))
+        newstring="".join([newstring,nlpExtract(cleanText,options)])
     if "alchemy" in options[0]:
-        product.append(alchemyExtract(cleanText,options))
+        newstring="".join([newstring,alchemyExtract(cleanText,options)])
     if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
         print(options)
         raise Exception("""No valid options selected. Please enter some 
             combination of 'nltk','sections',and 'alchemy""")
-    return product
+    return newstring
 
 def nlpExtract(cleanText,options):
     from nat_proc import FrequencySummarizer, split_paper
@@ -32,7 +30,21 @@ def nlpExtract(cleanText,options):
         raise e
     t = split_paper.split_paper(cleanText)
     f = FrequencySummarizer.FrequencySummarizer()
-    return [f.summarize(te,options[3]) for te in t if te]
+    final = [f.summarize(te,options[3]) for te in t if te]
+    newstring = ""
+    if t[0]:
+    #So, you need to check that all the values of final will correspond to the right values of t.
+    #If the t value doesn't exist, it will have been skipped over, so we shouldn't be adding it.
+    #Basically, stare at this until it makes sense again in the morning.
+        newstring="".join(["Introduction\n\n","\n".join(final[0])])
+    if t[1]:
+        if t[0]:
+            "".join([newstring,"Methods\n\n","\n".join(final[1])])
+        else:
+            "".join([newstring,"Methods\n\n","\n".join(final[0])])
+    if t[2]:#Adds the last element, which t[2] is promised to be.
+            "".join([newstring,"Conclusion\n\n","\n".join(final[-1])])
+    return newstring
 
 def alchemyExtract(cleanText,options):
     """In this case,options[1] should specify the number of keywords to be 
@@ -54,43 +66,12 @@ def alchemyExtract(cleanText,options):
             finalKeywords.append(rKeywords[i]['text'])
     else:
         finalKeywords = rKeywords
-    return finalKeywords #figure out formatting for this later.
-
-#def sectionExtract(cleanText,options):
-    
-def regexSeperate(cleanText,options):
-    import re
-
-def seperateSections(cleanText,options):
-    """Takes in cleanText as a string, returns a list of seperated sections."""
-    splits = ["\n\n","        "]
-    notFails = []
-    for splitter in splits:
-        attempt = cleanText.split(splitter)
-        attempt = [a for a in attempt if len(a)>6]
-        if len(attempt)>2:
-            notFails.append(attempt)
-    lessFails = []
-    failCount = []
-    for notFail in notFails:
-        fail=0
-        for section in notFail:
-            if len(section) < 50:
-                fail+=1
-            if len(section.split("/n"))>len(section)/30:
-                fail+=1
-        failCount.append(fail)
-    vec = zip(failCount,notFails)
-    for v in vec:
-        for notFail in v[1]:
-            print(notFail)
-    sortedVec = sorted(vec,lambda k,r: (k))
-    best = sortedVec[0]
-    return best
+    return "".join(finalKeywords) #figure out formatting for this later.
 
 if __name__ == '__main__':
     import codecs
-    cleanText=codecs.open("sample.txt",encoding="utf-8").read()
+    cleanText=codecs.open("test.pdf.txt",encoding="utf-8").read()
     ex = extract(cleanText,['alchemy',5])
-    #print(seperateSections(cleanText,""))
-    #print(extract(cleanText,['nltk','','',3]))
+    print(ex)
+    ex = extract(cleanText,['nltk','','',3])
+    print(ex)
