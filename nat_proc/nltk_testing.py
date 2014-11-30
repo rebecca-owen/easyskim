@@ -173,17 +173,17 @@ def pre_clean(text):
 	text = re.sub('- ', '', text)
 	text = re.sub(', ,', ',', text)
 
-	sents = sent_tokenize(text)
-	out = []
+	# sents = sent_tokenize(text)
+	# out = []
 
-	for s in sents:
-		if s.find('www') == -1 and s.find('E-mail') == -1 and s.find('Email') == -1 \
-		and s.find('Corresponding\ author') == -1 and s.find('Current\ address') == -1 \
-		and s.find('Article\ history') == -1 and s.find('Tel.') == -1:
-			out.append(s)
+	# for s in sents:
+	# 	if s.find('www') == -1 and s.find('E-mail') == -1 and s.find('Email') == -1 \
+	# 	and s.find('Corresponding\ author') == -1 and s.find('Current\ address') == -1 \
+	# 	and s.find('Article\ history') == -1 and s.find('Tel.') == -1:
+	# 		out.append(s)
  
-	return ' '.join(out)
-
+	# return ' '.join(out)
+	return text
 
 """"""""""""""""""
 
@@ -219,8 +219,8 @@ import codecs
 
 text_split = codecs.open('test2.txt', encoding='utf-8').read()
 
-# inp = pre_clean(text_split)
-# out = split_paper(inp)
+inp = pre_clean(text_split)
+out = split_paper(inp)
 # fs = FrequencySummarizer()
 
 # for t in out:
@@ -232,7 +232,7 @@ t = split_paper(text_split)
 f = FrequencySummarizer()
 
 final = []
-for te in t:
+for te in out:
 	if te:
 		final.append(f.summarize(te,5)) 
 	elif not te:
