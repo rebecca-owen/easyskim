@@ -10,7 +10,7 @@ pdftotext $1 input.txt
 meta=$(exiftool $1)
 
 author=$(echo "$meta" | grep Author | sed 's/.*://')
-creator=$(echo "$meta" | grep Creator | sed 's/.*://' )
+#creator=$(echo "$meta" | grep Creator | sed 's/.*://' )
 title=$(echo "$meta" | grep Title | sed 's/.*://')
 date=$(echo "$meta" | grep Create | sed 's/Create Date//')
 publisher=$(echo "$meta" | grep Publisher | sed 's/.*://')
@@ -21,7 +21,6 @@ doi=$(echo "$meta" | grep Doi | sed 's/.*://')
 author=$(echo "$author" | sed 's/^[ \t]*//' | sed -r 's/([a-zA-Z0-9]+) ([a-zA-Z0-9]+)/\2 \1/' | sed 's/ /; /') # Swap author first, last name and separate them with a semicolon ;
 
 metacsv=$(echo "{\"Author\":\"$author\",\n
-\"Creator\":\"$creator\",\n
 \"Title\":\"$title\",\n
 \"Date\":\"$date\",\n
 \"Publisher\":\"$publisher\",\n

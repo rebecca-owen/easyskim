@@ -28,7 +28,9 @@ $( '#upload_form' )
 
 function prettyAuthors(authors) {
 
+  console.log(authors)
   authors = authors.split(';');
+  console.log(authors)
 
   if(authors.length > 2) {
     first_two = authors[0] + '; ' + authors[1];
@@ -41,10 +43,10 @@ function prettyAuthors(authors) {
 
   else{
     if(authors.length == 2){
-      temp = '%s; %s' % (value[0], value[1])
+      temp = authors[0] + ', ' + authors[1]
     }
     else if (authors.length == 1){
-      temp = value[0]
+      temp = authors[0]
     }
     else if (authors.length == 0){
       temp = 'Not Available'
