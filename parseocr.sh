@@ -3,6 +3,7 @@
 #
 # Generates read and parsed text output at - input.pdf.txt
 # Generates extracted metadata at - input.pdf.meta
+# Requires exiftool, spell (low-pass filtering of mispelled words)
 #
 
 pdftotext $1 input.txt
