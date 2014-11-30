@@ -5,6 +5,7 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<head>
 		<title>EasySkim</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -28,11 +29,11 @@
 			<div class="wrapper style1">
 			
 			<!-- Header -->
-				<div id="header">
+				<!-- <div id="header">
 					<div class="container">
 							
 						<!-- Logo -->
-							<h1><a href="#" id="logo">Solarize</a></h1>
+							<!-- <h1><a href="#" id="logo">Solarize</a></h1>
 						
 						<!-- Nav -->
 <!-- 							<nav id="nav">
@@ -63,7 +64,7 @@
 								</ul>
 							</nav> -->
 	
-					</div>
+					<!-- </div>
 				</div>
 				
 			<!-- Banner -->
@@ -72,9 +73,9 @@
 						<h2>EasySkim</h2>
 						<!-- <span>Design by Templated</span> -->
 						<span></span>
-						<span>Analyse and summarise your academic papers</span>
+						<span style="color:black">Summarise your academic papers</span>
 						<h4 id="login">
-							<a href="{{ login_url }}" >LOgin</a></h4>
+							<a href="{{ login_url }}" >Login</a></h4>
 					</section>
 				</div>
 
@@ -86,21 +87,21 @@
 					<div class="row double">
 						<div class="6u">
 							<header class="major">
-								<h2>Pellentesque viverra vulputate enim. Aliquam volutpat. Pellentesque tristique Risus</h2>
-								<span class="byline">In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Donec pulvinar ullamcorper metus.</span>
+								<h2>Save time with an automated, sub-divided, intelligent summary of your research reading</h2>
+								<p>Easyskim processes PDF files from your Mendeley library or direct upload and produces a plain text summary.</p>
 							</header>
 						</div>
 						<div class="6u">
-							<h3>Suspendisse dictum porta</h3>
-							<p>Donec leo. Vivamus fermentum nibh in augue. Praesent a lacus at urna congue rutrum. Nulla enim eros, porttitor eu, tempus id, varius non, nibh. Vestibulum imperdiet, magna nec eleifend semper augue mattis wisi maecenas ligula nunc lectus vestibulum euismod lacinia quam nisl.</p>
-							<a href="#" class="button">Nulla aluctus eleifend</a>
+							<h3>Analytics</h3>
+							<p>Easyskim extracts metadata and uses the Mendeley SDK to provide you with useful analytic material.</p>
+							<a href="https://github.com/rebeccamorgan/easyskim" class="button">View on Github</a>
 						</div>
 					</div>
 				</section>
 			</div>
 
 		<!-- Section Two -->
-			<div class="wrapper style3">
+<!-- 			<div class="wrapper style3">
 				<section class="container">
 					<header class="major">
 						<h2>Cras vitae metus aliNuam</h2>
@@ -108,10 +109,10 @@
 					<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</p>
 					<a href="#" class="button alt">Nulla aluctus eleifend</a>
 				</section>
-			</div>
+			</div> -->
 
 		<!-- Section Three -->
-			<div class="wrapper style4">
+			<!-- <div class="wrapper style4">
 				<section class="container">
 					<header class="major">
 						<h2>Cras vitae metus aliNuam</h2>
@@ -177,52 +178,53 @@
 						</div>
 					</div>
 				</section>
-			</div>
+			</div> -->
 		
-		<!-- Team -->
-			<div class="wrapper style5">
-				<section id="team" class="container">
-					<header class="major">
-						<h2>Cras vitae metus aliNuam</h2>
-						<span class="byline">pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu</span>
-					</header>
-					<div class="row">
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>Molly Millions</h3>
-							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>Henry Dorsett Case</h3>
-							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>Willis Corto</h3>
-							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>Linda Lee</h3>
-							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
-						</div>
-					</div>
-				</section>
-			</div>
+    <!-- Team -->
+      <div class="wrapper style5">
+        <section id="team" class="container">
+          <header class="major">
+            <h2>Meet the Team</h2>
+            <span class="byline">Launched at <a href="http://oxhack.co.uk/" style="color:black">oxHACK 2014</a></span>
+          </header>
+          <div class="row">
+            <div class="3u">
+              <a href="#" class="image"><img src="static/images/placeholder.png" alt=""></a>
+              <h3>Josh Cai</h3>
+              <p>Computer Science Student, The University of Texas at Dallas.</p>
+            </div>
+            <div class="3u">
+              <a href="#" class="image"><img src="static/images/placeholder.png" alt=""></a>
+              <h3>Keller Scholl</h3>
+              <p>PPE Student, University of Oxford.</p>
+            </div>
+            <div class="3u">
+              <a href="#" class="image"><img src="static/images/deyan.jpg" alt=""></a>
+              <h3>Deyan Levski</h3>
+              <p>DPhil Student in Engineering, University of Oxford.</p>
+            </div>
+            <div class="3u">
+              <a href="http://rebeccamorgan.me/" class="image"><img src="static/images/rebecca.png" alt=""></a>
+              <h3>Rebecca Morgan</h3>
+              <p>DPhil Student in Geophysics, University of Oxford.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
 
 	<!-- Footer -->
 		<div id="footer">
 			<section class="container">
 				<header class="major">
 					<h2>Connect with us</h2>
-					<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
 				</header>
 				<ul class="icons">
-					<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-					<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-					<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-					<li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
+					<!-- <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li> -->
+					<li><a href="https://twitter.com/easyskim" class="fa fa-twitter"><span>Twitter</span></a></li>
+					<li><a href="mailto:admin@easyskim.co.uk" class="fa fa-inbox"><span>Email</span></a></li>
+<!-- 					<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+					<li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li> -->
 				</ul>
 				<hr />
 			</section>

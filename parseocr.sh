@@ -10,7 +10,7 @@ pdftotext $1 input.txt
 meta=$(exiftool $1)
 
 author=$(echo "$meta" | grep Author | sed 's/.*://')
-creator=$(echo "$meta" | grep Creator | sed 's/.*://' )
+creator=$(echo "$meta" | grep "Creator   " | sed 's/.*://' )
 title=$(echo "$meta" | grep Title | sed 's/.*://')
 date=$(echo "$meta" | grep Create | sed 's/Create Date//')
 publisher=$(echo "$meta" | grep Publisher | sed 's/.*://')
