@@ -87,7 +87,6 @@ def removeUnwantedSpaces(text):
     text = re.sub(' \.', '.', text)
     text = re.sub(' \,', ',', text)
     text = re.sub(' \;', ';', text)
-    text = re.sub('\n;', ' ', text)
     return text
 
 if __name__ == '__main__':
