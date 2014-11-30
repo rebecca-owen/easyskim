@@ -1,5 +1,5 @@
 @import url("font-awesome.min.css");
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
 
 /*
 	Solarize by TEMPLATED
@@ -578,7 +578,7 @@
 		}
 
 		.wrapper.style2 {
-			background: #f2f2f2;
+			background: #f6f6f6;
 		}
 
 			.wrapper.style2 .major {
