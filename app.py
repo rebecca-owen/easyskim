@@ -154,8 +154,13 @@ def getPdf(session, doc_id):
     """
     doc = session.documents.get(doc_id)
 
-    doc_url = doc.files.list().items[0].download_url
-
+    try:
+        doc_url = doc.files.list().items[0].download_url
+    except Exception as e:
+        print(doc)
+        print(doc.files)
+        print(doc.files.list())
+        raise e
     f = tempfile.NamedTemporaryFile(delete=False)
     f.write(urllib.urlopen(doc_url).read())
     f.close()
