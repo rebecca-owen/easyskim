@@ -14,11 +14,11 @@ options[3] is for nltk, and specifies..."""
     if "nltk" in options[0]:
         newstring += nlpExtract(cleanText,options)
     if "alchemy" in options[0]:
-        newstring += alchemyExtract(cleanText,options)
-    if "nltk" not in options[0] and "sections" not in options[0] and "alchemy" not in options[0]:
+        newstring="".join([newstring,alchemyExtract(cleanText,options)])
+    if "nltk" not in options[0] and "alchemy" not in options[0]:
         print(options)
         raise Exception("""No valid options selected. Please enter some 
-            combination of 'nltk','sections',and 'alchemy""")
+            combination of 'nltk', and 'alchemy""")
     return newstring
 
 def nlpExtract(cleanText,options):
