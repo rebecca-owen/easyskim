@@ -20,10 +20,10 @@ import jinja_filters
 # print dir(ssl)
 # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 # ssl_context.load_cert_chain('ssl-bundle.crt', 'easyskim.key')
-from OpenSSL import SSL
-ssl_context = SSL.Context(SSL.SSLv23_METHOD)
-ssl_context.use_privatekey_file('easyskim.key')
-ssl_context.use_certificate_file('ssl-bundle.crt')
+# from OpenSSL import SSL
+# ssl_context = SSL.Context(SSL.SSLv23_METHOD)
+# ssl_context.use_privatekey_file('easyskim.key')
+# ssl_context.use_certificate_file('ssl-bundle.crt')
 
 client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
@@ -182,5 +182,5 @@ def textToEncoded(text):
     return clean
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='5000', debug=False, ssl_context=ssl_context)
-    #app.run()
+    # app.run(host='127.0.0.1', port='5000', debug=False, ssl_context=ssl_context)
+    app.run()
