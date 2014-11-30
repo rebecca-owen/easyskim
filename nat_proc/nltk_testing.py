@@ -217,18 +217,40 @@ import codecs
 #   print l + "\n"
 
 
-text_split = codecs.open('text.txt', encoding='utf-8').read()
+text_split = codecs.open('test2.txt', encoding='utf-8').read()
 
-inp = pre_clean(text_split)
-out = split_paper(inp)
-fs = FrequencySummarizer()
+# inp = pre_clean(text_split)
+# out = split_paper(inp)
+# fs = FrequencySummarizer()
 
-for t in out:
-	if t:
-		data = fs.summarize(t,3)
-		print data
+# for t in out:
+# 	if t:
+# 		data = fs.summarize(t,3)
+# 		print data
 
+t = split_paper(text_split)
+f = FrequencySummarizer()
 
+final = []
+for te in t:
+	if te:
+		final.append(f.summarize(te,5)) 
+	elif not te:
+		final.append("EMPTY")
+
+newstring = ""
+
+if  "EMPTY" not in final[0]:
+	newstring= "".join([newstring,"\n\n","Introduction\n\n","\n".join(final[0])])
+if  "EMPTY" not in final[1]:
+    newstring = "".join([newstring,"\n\n","Methods\n\n","\n".join(final[1])])
+if  "EMPTY" not in final[2]:
+    newstring = "".join([newstring,"\n\n","Results\n\n","\n".join(final[2])])
+if  "EMPTY" not in final[3]:
+    newstring = "".join([newstring,"\n\n","Conclusions\n\n","\n".join(final[3])])
+
+print len(final)
+print newstring
 
 
 
