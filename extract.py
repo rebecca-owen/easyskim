@@ -22,6 +22,8 @@ options[3] is for nltk, and specifies..."""
     return newstring
 
 def nlpExtract(cleanText,options):
+    """Calls the split_paper and FrequencySummarizer programs. 
+    options[3] will be interpreted as the number of sentences to print out."""
     from nat_proc import FrequencySummarizer, split_paper
     try:
         options[3]=int(options[3])
@@ -33,11 +35,8 @@ def nlpExtract(cleanText,options):
     t = split_paper.split_paper(cleanText)
     f = FrequencySummarizer.FrequencySummarizer()
 
-
-    """
-    Instead of looping through output, fill empty sections with EMPTY and test for this
-    when constructing newstring
-    """
+    #Instead of looping through output, fill empty sections with EMPTY and 
+    #test for this when constructing newstring
     final = []
     for te in t:
         if te:
@@ -59,7 +58,8 @@ def nlpExtract(cleanText,options):
     return newstring
 
 def alchemyExtract(cleanText,options):
-    """In this case,options[1] should specify the number of keywords to be 
+    """Uses alchemyAPI to find keywords in the cleaned text. 
+    In this case,options[1] should specify the number of keywords to be 
     used. Default to 4."""
     try:
         options[1]=int(options[1])
@@ -80,8 +80,9 @@ def alchemyExtract(cleanText,options):
         finalKeywords = rKeywords
     return "\n\nKeywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
 
-
 def removeUnwantedSpaces(text):
+    """A simple function that strips text of spaces and leftover symbols that
+    shouldn't be there with regular expressions."""
     text = re.sub(' \.', '.', text)
     text = re.sub(' \,', ',', text)
     text = re.sub(' \;', ';', text)
