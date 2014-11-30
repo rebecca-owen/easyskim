@@ -6,6 +6,22 @@ $(".document").click(function() {
   request($(this).data("id"));
 });
 
+$( '#upload_form' )
+  .submit( function( e ) {
+    $.ajax( {
+      url: 'http://localhost:5000/uploaded',
+      type: 'POST',
+      data: new FormData( this ),
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        var t = $.parseJSON(data);
+        $('#summary').html(t['text']);
+      }
+    } );
+    e.preventDefault();
+  });
+
 function request(doc_id) {
     $.ajax({
       type: "POST",

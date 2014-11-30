@@ -14,6 +14,20 @@
 		height: 500px;
 	}
 
+	#summary {
+	  margin-top: -65px;
+	}
+
+	#login{
+		margin-top: 40px;
+		display: inline-block;
+	  padding: 0.50em 0.30em;
+	  background: #80B2FF;
+	  font-size: 1.75em;
+	  font-weight: 300;
+	  width: 125px;
+	}
+
 	body {
 		background: #222222;
 	}

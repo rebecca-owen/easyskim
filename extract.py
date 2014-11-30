@@ -22,7 +22,7 @@ options[3] is for nltk, and specifies..."""
     return product
 
 def nlpExtract(cleanText,options):
-    from nat_proc import FrequencySummarizer,split_paper
+    from nat_proc import FrequencySummarizer, split_paper
     try:
         options[3]=int(options[3])
     except IndexError as e:
@@ -30,9 +30,9 @@ def nlpExtract(cleanText,options):
     except ValueError as e:
         print("You selected nltk, and options[3] was not a valid integer.")
         raise e
-    t = split_paper(pdfText)
+    t = split_paper.split_paper(cleanText)
     f = FrequencySummarizer.FrequencySummarizer()
-    return relevantSentences=[f.summarize(te,options[3]) for te in t if te]
+    return [f.summarize(te,options[3]) for te in t if te]
 
 def alchemyExtract(cleanText,options):
     """In this case,options[1] should specify the number of keywords to be 

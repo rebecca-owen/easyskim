@@ -85,12 +85,10 @@ def document():
 
     mendeley_session = get_session_from_cookies()
 
-    print 'requested'
     doc_id = request.form['doc_id']
-    # text = convertToTxt(getPdf(mendeley_session, doc_id))
     raw_text = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
-    info = getInfo(mendeley_session, doc_id)
+    # info = getInfo(mendeley_session, doc_id)
     final_text = '<pre>%s</pre>' % text
     return json.dumps({ "text": final_text }), 200
 
@@ -104,8 +102,22 @@ def logout():
     session.pop('token', None)
     return redirect('/')
 
-# def get_authors():
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] == 'pdf'
 
+@app.route('/uploaded', methods=['POST'])
+def uploaded_file():
+    temp = request.files['file']
+    if temp and allowed_file(temp.filename):
+        f = tempfile.NamedTemporaryFile(delete=False)
+        f.write(temp.stream.read())
+        f.close()
+        raw_text = convertToTxt(f)
+        text = wrapper.textChanger(textToEncoded(raw_text))
+        final_text = '<pre>%s</pre>' % text
+        print final_text
+        return json.dumps({ "text": final_text }), 200
+    return json.dumps({ "error": "not valid file" }), 500
 
 def get_mendeley_config():
     scheme, netloc, path, query_string, fragment = urlsplit(request.url)
@@ -116,19 +128,19 @@ def get_mendeley_config():
 def get_session_from_cookies():
     return MendeleySession(get_mendeley_config(), session['token'])
 
-def getInfo(session, doc_id):
-    """Get info from Mendeley document id
-    Returns info dict
-    """
-    doc = session.documents.get(doc_id)
+# def getInfo(session, doc_id):
+#     """Get info from Mendeley document id
+#     Returns info dict
+#     """
+#     doc = session.documents.get(doc_id)
 
-    doc_url = doc.files.list().items[0].download_url
+#     doc_url = doc.files.list().items[0].download_url
 
-    f = tempfile.NamedTemporaryFile(delete=False)
-    f.write(urllib.urlopen(doc_url).read())
-    f.close()
+#     f = tempfile.NamedTemporaryFile(delete=False)
+#     f.write(urllib.urlopen(doc_url).read())
+#     f.close()
 
-    return f
+#     return f
 
 def getPdf(session, doc_id):
     """Get pdf from Mendeley document id
@@ -146,7 +158,8 @@ def getPdf(session, doc_id):
 
 def convertToTxt(pdf):
     """convert PDF (file object) to text, returns text"""
-    text = check_output(["pdftotext", pdf.name, "-"])
+    # text = check_output(["pdftotext", pdf.name, "-"])
+    text = check_output(["sh", "parseocr.sh", pdf.name])
     os.unlink(pdf.name)
     return text
 

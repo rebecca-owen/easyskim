@@ -34,7 +34,7 @@ echo "$metacsv" > $1.met
 tr -cd '\11\12\15\40-\176' < input.txt > input-ascii.txt
 mv input-ascii.txt input.txt
 
-wordMask=$(spell input.txt)
+# wordMask=$(spell input.txt)
 
 line=$(cat input.txt)
 
