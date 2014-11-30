@@ -48,6 +48,14 @@ export MENDELEY_CLIENT_SECRET= kUSg3oEFhb58TAez
 
 ```
 
+Within the python interpreter, install nltk libraries as described [here](http://www.nltk.org/data.html) which launches the GUI installer.
+
+```
+import nltk
+nltk.download()
+
+```
+
 
 ### Temporary Local Use
 
