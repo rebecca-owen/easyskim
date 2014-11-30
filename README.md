@@ -24,7 +24,9 @@ Email us: [admin@easyskim.co.uk](mailto:admin@easyskim.co.uk)
 
 
 ### Installation
-Installation requires Python 2.7+ and pip. Mendeley Client ID and Secret can be obtained from [Mendeley Dev](http://dev.mendeley.com/) and must be exported as variables before launching the app, where < > are replaced by the values you receive from the website.
+Installation requires Python 2.7+, pip, pdftotext and exiftool (python package dependencies are installed later by pip). Mendeley Client ID and Secret can be obtained from [Mendeley Dev](http://dev.mendeley.com/) and must be exported as variables before launching the app, where < > are replaced by the values you receive from the website. 
+
+For the "Redirect URL", use a local host such as ```http://localhost:5000/oauth``` and then click "Generate Secret". The name and description is anything of your choice.
 
 
 ```
@@ -38,10 +40,25 @@ export MENDELEY_CLIENT_SECRET= < >
 
 ```
 
-### Use
+For example:
+
+```
+export MENDELEY_CLIENT_ID= 1181
+export MENDELEY_CLIENT_SECRET= kUSg3oEFhb58TAez
+
+```
+
+
+### Temporary Local Use
 
 ```
 python app.py
 ```
+The output of this will be something like:
 
-Visit the localhost address e.g. ```localhost:5000``` in your browser to use the app.
+```
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+ ```
+ 
+Visit the localhost address, substituting this phrase in for e.g. ```127.0.0.1``` in this case. For this example, visit ```localhost:5000``` in your browser to use the app with Mendeley.
