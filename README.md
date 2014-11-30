@@ -24,7 +24,9 @@ Email us: [admin@easyskim.co.uk](mailto:admin@easyskim.co.uk)
 
 
 ### Installation
-Installation requires Python 2.7+ and pip. Mendeley Client ID and Secret can be obtained from [Mendeley Dev](http://dev.mendeley.com/) and must be exported as variables before launching the app, where < > are replaced by the values you receive from the website. For the "Redirect URL", use a local host such as ```http://localhost:5000/oauth``` and then click "Generate Secret". The name and description is anything of your choice.
+Installation requires Python 2.7+, pip, pdftotext and exiftool (python package dependencies are installed later by pip). Mendeley Client ID and Secret can be obtained from [Mendeley Dev](http://dev.mendeley.com/) and must be exported as variables before launching the app, where < > are replaced by the values you receive from the website. 
+
+For the "Redirect URL", use a local host such as ```http://localhost:5000/oauth``` and then click "Generate Secret". The name and description is anything of your choice.
 
 
 ```
