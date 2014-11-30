@@ -158,8 +158,8 @@ def convertToTxt(pdf):
     text = check_output(["sh", "parseocr.sh", pdf.name])
     with open(pdf.name+'.met') as f:
         metadata = f.read()
-    os.unlink(pdf.name)
     name = pdf.name
+    os.unlink(pdf.name)
     os.unlink(name+'.met')
     return (text, metadata)
 
