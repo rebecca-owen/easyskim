@@ -45,7 +45,7 @@
                         <input type=submit value=Upload>
                       </form> -->
                       <form id="upload_form" enctype=multipart/form-data>
-                      <a href="#" onclick="document.getElementById('file').click(); return false;"/>Browse</a>
+                      <a href="#" onclick="document.getElementById('file').click(); return false;"/>Select File</a>
                       
                       <input type="file" id="file" name=file  style="visibility: collapse;"/>
                       <input type=submit value=Upload>
@@ -56,7 +56,11 @@
     <input type="file" class="upload" />
 </div> -->
                     </li>
-                    <li><a href="/logout">Logout</a></li>
+                    {% if logged_in %}
+                      <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                      <li><a href="{{login_url}}">Login</a></li>
+                    {% endif %}
                   </ul>
                 </nav>
             </div>
@@ -82,6 +86,12 @@
                 <div>
                   {{ doc.names | authors}}
                 </div>
+              {% else %}
+                {% if logged_in %}
+                  <p>You don't have any documents! :(</p>
+                {% else %}
+                  <p><a href="{{login_url}}">Login to Mendeley</a> to access your documents!</a></p>
+                {% endif %}
               {% endfor %}
             </div>
 
