@@ -1,3 +1,5 @@
+import re
+
 introMarkers = ["Introduction:","Beginning","Literature Review","1."]
 endMarkers = ["Results","Conclusion"]
 bibMarkers = ["References", "Bibliography","Citations"]
@@ -30,20 +32,30 @@ def nlpExtract(cleanText,options):
         raise e
     t = split_paper.split_paper(cleanText)
     f = FrequencySummarizer.FrequencySummarizer()
-    final = [f.summarize(te,options[3]) for te in t if te]
+
+
+    """
+    Instead of looping through output, fill empty sections with EMPTY and test for this
+    when constructing newstring
+    """
+    final = []
+    for te in t:
+        if te:
+            final.append([x.replace('\n', ' ') for x in f.summarize(te,options[3])]) 
+        elif not te:
+            final.append("EMPTY")
+
     newstring = ""
-    if t[0]:
-    #So, you need to check that all the values of final will correspond to the right values of t.
-    #If the t value doesn't exist, it will have been skipped over, so we shouldn't be adding it.
-    #Basically, stare at this until it makes sense again in the morning.
-        newstring="".join(["Introduction\n\n","\n".join(final[0])])
-    if t[1]:
-        if t[0]:
-            "".join([newstring,"Methods\n\n","\n".join(final[1])])
-        else:
-            "".join([newstring,"Methods\n\n","\n".join(final[0])])
-    if t[2]:#Adds the last element, which t[2] is promised to be.
-            "".join([newstring,"Conclusion\n\n","\n".join(final[-1])])
+
+    if  "EMPTY" not in final[0]:
+        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + removeUnwantedSpaces(" ".join(final[0])) + "</p>"])
+    if  "EMPTY" not in final[1]:
+        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[1])) + "</p>"])
+    if  "EMPTY" not in final[2]:
+        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[2])) + "</p>"])
+    if  "EMPTY" not in final[3]:
+        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[3])) + "</p>"])
+
     return newstring
 
 def alchemyExtract(cleanText,options):
@@ -66,7 +78,14 @@ def alchemyExtract(cleanText,options):
             finalKeywords.append(rKeywords[i]['text'])
     else:
         finalKeywords = rKeywords
-    return "".join(finalKeywords) #figure out formatting for this later.
+    return "\n\nKeywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
+
+
+def removeUnwantedSpaces(text):
+    text = re.sub(' \.', '.', text)
+    text = re.sub(' \,', ',', text)
+    text = re.sub(' \;', ';', text)
+    return text
 
 if __name__ == '__main__':
     import codecs

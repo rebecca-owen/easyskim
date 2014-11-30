@@ -16,7 +16,6 @@ import codecs
 import jinja_filters
 
 
-
 client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
 
@@ -89,8 +88,7 @@ def document():
     raw_text, _ = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
     # info = getInfo(mendeley_session, doc_id)
-    final_text = '<pre>%s</pre>' % text
-    return json.dumps({ "text": final_text }), 200
+    return json.dumps({ "text": text }), 200
 
 @app.route('/static/<path:path>')
 def static_proxy(path):
@@ -114,9 +112,7 @@ def uploaded_file():
         f.close()
         raw_text, metadata = convertToTxt(f)
         text = wrapper.textChanger(textToEncoded(raw_text))
-        final_text = '<pre>%s</pre>' % text
-        print final_text
-        return json.dumps({ "text": final_text, "meta": metadata }), 200
+        return json.dumps({ "text": text, "meta": metadata }), 200
     return json.dumps({ "error": "not valid file" }), 500
 
 def get_mendeley_config():
@@ -162,8 +158,8 @@ def convertToTxt(pdf):
     text = check_output(["sh", "parseocr.sh", pdf.name])
     with open(pdf.name+'.met') as f:
         metadata = f.read()
-    os.unlink(pdf.name)
     name = pdf.name
+    os.unlink(pdf.name)
     os.unlink(name+'.met')
     return (text, metadata)
 

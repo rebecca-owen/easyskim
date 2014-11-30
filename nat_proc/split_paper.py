@@ -1,13 +1,13 @@
 def is_number(s):
-    try:
-        float(s) # for int, long and float
-    except ValueError:
-        try:
-            complex(s) # for complex
-        except ValueError:
-            return False
+	try:
+		float(s) # for int, long and float
+	except ValueError:
+		try:
+			complex(s) # for complex
+		except ValueError:
+			return False
 
-    return True
+	return True
 
 def split_paper(text):
 
@@ -23,6 +23,7 @@ def split_paper(text):
 	introText =[]
 	methText =[]
 	discText = []
+	resText = []
 	chunk =[]
 	paras = []
 	sects = []
@@ -59,11 +60,6 @@ def split_paper(text):
 				sects.append(' '.join(cont))
 				cont = [i]
 
-	# for i in sects:
-	# 	print i + "\n\n"
-
-	# print len(sects)
-
 
 	""" 
 	Split based on header terms by word tokens 
@@ -78,22 +74,30 @@ def split_paper(text):
 				introText.append(text)
 			elif i=='method' or i=='methods':
 				methText.append(text)
+			elif i=='results':
+				resText.append(text)
 			elif i=='discussion' or i=='conclusions':
 				discText.append(text)
-
 
 	if introText:
 		introOut = introText[0].encode('ascii', errors='backslashreplace')
 	else:
-		introOut = sects[0:2]
+		introOut = sects[0:8]
 	if methText:
 		methOut = methText[0].encode('ascii', errors='backslashreplace')
 	else:
 		methOut = []
+	if resText:
+		resOut = resText[0].encode('ascii', errors='backslashreplace')
+	else:
+		resOut = []
 	if discText:
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
-		discOut = sects[-2:]
+		discOut = sects[-8:]
 
-	return  introOut, methOut, discOut
+	return  introOut, methOut, resOut, discOut
 
+
+
+	
