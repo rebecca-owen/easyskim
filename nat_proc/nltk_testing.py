@@ -221,7 +221,7 @@ fs = FrequencySummarizer()
 
 for t in out:
 	if t:
-		data = fs.summarize(t,1)
+		data = fs.summarize(t,3)
 		print data
 
 

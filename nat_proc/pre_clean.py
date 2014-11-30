@@ -1,3 +1,7 @@
+import re
+from nltk.tokenize import sent_tokenize
+
+
 def pre_clean(text):
 
 	text = re.sub(r'\[.*?\]\s*', '', text)
