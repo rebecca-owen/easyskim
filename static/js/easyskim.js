@@ -1,3 +1,5 @@
+var currentSite = window.location.origin;
+
 $(".document").click(function() {
   $("#summary_header").html($(this).html());
   $("#summary_authors").html($(this).next().html());
@@ -9,7 +11,7 @@ $(".document").click(function() {
 $( '#upload_form' )
   .submit( function( e ) {
     $.ajax( {
-      url: 'http://localhost:5000/uploaded',
+      url: currentSite + '/uploaded',
       type: 'POST',
       data: new FormData( this ),
       processData: false,
@@ -28,9 +30,7 @@ $( '#upload_form' )
 
 function prettyAuthors(authors) {
 
-  console.log(authors)
   authors = authors.split(';');
-  console.log(authors)
 
   if(authors.length > 2) {
     first_two = authors[0] + '; ' + authors[1];
@@ -60,7 +60,7 @@ function prettyAuthors(authors) {
 function request(doc_id) {
     $.ajax({
       type: "POST",
-      url: "http://localhost:5000/document",
+      url: currentSite + "/document",
       data: {
           'doc_id': doc_id
       },
