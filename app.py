@@ -9,18 +9,28 @@ from flask import Flask, redirect, render_template, request, session
 from mendeley import Mendeley
 from mendeley.session import MendeleySession
 from werkzeug.contrib.fixers import ProxyFix
+from flask_sslify import SSLify
 
 import wrapper
 import codecs
 
 import jinja_filters
 
+#import ssl
+#print dir(ssl)
+#ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+#ssl_context.load_cert_chain('ssl-bundle.crt', 'easyskim.key')
+from OpenSSL import SSL
+ssl_context = SSL.Context(SSL.SSLv23_METHOD)
+ssl_context.use_privatekey_file('easyskim.key')
+ssl_context.use_certificate_file('easyskim.crt')
 
 
 client_id = os.environ['MENDELEY_CLIENT_ID']
 client_secret = os.environ['MENDELEY_CLIENT_SECRET']
 
 app = Flask(__name__)
+sslify = SSLify(app)
 app.jinja_env.filters['authors'] = jinja_filters.authors
 app.debug = True
 app.secret_key = client_secret
@@ -176,4 +186,5 @@ def textToEncoded(text):
     return clean
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port='5000', debug=False, ssl_context=ssl_context)
+    #app.run()
