@@ -18,6 +18,8 @@ description=$(echo "$meta" | grep Description | sed 's/.*://')
 issn=$(echo "$meta" | grep ISSN | sed 's/.*://')
 doi=$(echo "$meta" | grep Doi | sed 's/.*://')
 
+author=$(echo "$author" | sed 's/^[ \t]*//' | sed -r 's/([a-zA-Z0-9]+) ([a-zA-Z0-9]+)/\2 \1/' | sed 's/ /; /') # Swap author first, last name and separate them with a semicolon ;
+
 metacsv=$(echo "{\"Author\":\"$author\",\n
 \"Creator\":\"$creator\",\n
 \"Title\":\"$title\",\n
@@ -34,7 +36,7 @@ echo "$metacsv" > $1.met
 tr -cd '\11\12\15\40-\176' < input.txt > input-ascii.txt
 mv input-ascii.txt input.txt
 
-# wordMask=$(spell input.txt)
+wordMask=$(spell input.txt)
 
 line=$(cat input.txt)
 
@@ -62,6 +64,9 @@ line=$(echo "$line" | sed 'N;/^\n$/d;P;D') # Remove blank lines and leave a sing
 line=$(echo "$line" | sed '/^[0-9][0-9]*$/d') # Remove lines starting with single/few numbers
 
 line=$(echo "$line" | sed 's/(.*)//') # Remove short stuff between brackets ()
+
+line=$(echo "$line" | sed 's/.*address.*//') # Remove lines with address in them i.e. e-mail address
+
 
 #line=$(echo "$line" | sed -i '/^.$/d')
 
