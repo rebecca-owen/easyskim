@@ -70,13 +70,18 @@ def home():
 
     name = mendeley_session.profiles.me.display_name
     docs = []
-    for document in mendeley_session.documents.iter():
-        docs.append(
-            {
-                'title': document.title,
-                'id': document.id,
-                'names': ['%s, %s' % (x.last_name, x.first_name) for x in document.authors]
-            })
+    if mendeley_session.documents:
+        for document in mendeley_session.documents.iter():
+            temp_dict = {
+                    'title': document.title,
+                    'id': document.id,
+                }
+            if document.authors:
+                temp_dict['names'] = ['%s, %s' % (x.last_name, x.first_name) for x in document.authors]
+            else:
+                temp_dict['names'] = []
+            docs.append(temp_dict)
+
 
     # print convertToTxt(getPdf(mendeley_session, docs[0]['id']))
 
@@ -95,10 +100,27 @@ def document():
     mendeley_session = get_session_from_cookies()
 
     doc_id = request.form['doc_id']
-    raw_text, _ = convertToTxt(getPdf(mendeley_session, doc_id))
+    raw_text, metadata = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
+    # print "metadata: " + metadata
+    # meta = getMeta(mendeley_session, metadata)
+
+
     # info = getInfo(mendeley_session, doc_id)
+
     return json.dumps({ "text": text }), 200
+
+# def getMeta(session, data):
+#     data = json.loads(data)
+#     doi = data['DOI']
+#     print doi
+#     author = data['Author']
+#     print author
+#     # html = '<p>Number of Mendeley Readers: ' + session.catalog.by_identifier(doi=doi, view='stats').reader_count + '</p>'
+#         # +'<p>Other Papers by Author in Catalogue: ' + session.catalog.advanced_search(author=Author) + '</p>'
+#         # +'<p>Full citation: ' + session.catalog.by_identifier(doi, view='bib') + '</p>'
+#     html = ""
+#     return html
 
 @app.route('/static/<path:path>')
 def static_proxy(path):
