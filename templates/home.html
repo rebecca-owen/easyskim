@@ -39,10 +39,17 @@
                   <ul>
                     <li>
 
-                      <form id="upload_form" enctype=multipart/form-data>
+                   <!--    <form id="upload_form" enctype=multipart/form-data>
                         <input type=file name=file>
                         <input type=submit value=Upload>
-                      </form>
+                      </form> -->
+                      <form id="upload_form" enctype=multipart/form-data>
+                      <a href="#" onclick="document.getElementById('file').click(); return false;"/>Browse</a>
+                      
+                      <input type="file" id="file" name=file  style="visibility: collapse;"/>
+                      <input type=submit value=Upload>
+                      <form>
+
 <!-- <div class="fileUpload btn btn-primary">
     <span>Upload</span>
     <input type="file" class="upload" />
