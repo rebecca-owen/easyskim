@@ -12,7 +12,7 @@ options[2] is for sectionExtract, and specifies...
 options[3] is for nltk, and specifies..."""
     newstring=""
     if "nltk" in options[0]:
-        newstring += nlpExtract(cleanText,options)
+        newstring="".join([newstring,nlpExtract(cleanText,options)])
     if "alchemy" in options[0]:
         newstring="".join([newstring,alchemyExtract(cleanText,options)])
     if "nltk" not in options[0] and "alchemy" not in options[0]:
@@ -41,22 +41,20 @@ def nlpExtract(cleanText,options):
     final = []
     for te in t:
         if te:
-            temp = f.summarize(te, options[3])
-            temp2 = [x.replace('\n', ' ') for x in temp]
-            final.append(temp2) 
+            final.append([x.replace('\n', ' ') for x in f.summarize(te,options[3])]) 
         elif not te:
             final.append("EMPTY")
 
     newstring = ""
 
     if  "EMPTY" not in final[0]:
-        newstring += "<h4>Introduction</h4><p>" + removeUnwantedSpaces(" ".join(final[0])) + "</p>"
+        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + removeUnwantedSpaces(" ".join(final[0])) + "</p>"])
     if  "EMPTY" not in final[1]:
-        newstring += "<h4>Methods</h4><p>" + removeUnwantedSpaces(" ".join(final[1])) + "</p>"
+        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[1])) + "</p>"])
     if  "EMPTY" not in final[2]:
-        newstring += "<h4>Results</h4><p>" + removeUnwantedSpaces(" ".join(final[2])) + "</p>"
+        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[2])) + "</p>"])
     if  "EMPTY" not in final[3]:
-        newstring += "<h4>Conclusions</h4><p>" + removeUnwantedSpaces(" ".join(final[3])) + "</p>"
+        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[3])) + "</p>"])
 
     return newstring
 
@@ -80,7 +78,7 @@ def alchemyExtract(cleanText,options):
             finalKeywords.append(rKeywords[i]['text'])
     else:
         finalKeywords = rKeywords
-    return "Keywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
+    return "\n\nKeywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
 
 
 def removeUnwantedSpaces(text):

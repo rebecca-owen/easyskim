@@ -10,6 +10,8 @@ def textChanger(pdfText, mostAuthor="", mostPaper="",extractOptions=["nltkalchem
     if mostPaper:
         mostPaper = evaluator(paperCounter(pdfText))
     ex = extract(pdfText,extractOptions)
+    ex=re.sub("\\\\n"," ",ex)
+    ex=re.sub('", u"','',ex)
     return ex
 if __name__=="__main__":
     import codecs
