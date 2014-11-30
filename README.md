@@ -47,10 +47,16 @@ export MENDELEY_CLIENT_SECRET= kUSg3oEFhb58TAez
 ```
 
 
-### Use
+### Temporary Local Use
 
 ```
 python app.py
 ```
+The output of this will be something like:
 
-Visit the localhost address e.g. ```localhost:5000``` in your browser to use the app.
+```
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+ ```
+ 
+Visit the localhost address, substituting this phrase in for e.g. ```127.0.0.1``` in this case. For this example, visit ```localhost:5000``` in your browser to use the app with Mendeley.
