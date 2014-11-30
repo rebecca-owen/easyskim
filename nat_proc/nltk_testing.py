@@ -47,7 +47,8 @@ class FrequencySummarizer:
 		"""
 		text = unicode(text)
 		sents = sent_tokenize(text)
-		assert n <= len(sents)
+		if n > len(sents):
+			n = len(sents)
 		word_tk = [word_tokenize(s.lower()) for s in sents]
 		self._freq = self._compute_frequencies(word_tk)
 		ranking = defaultdict(int)
@@ -66,24 +67,31 @@ class FrequencySummarizer:
 
 
 def is_number(s):
-    try:
-        float(s) # for int, long and float
-    except ValueError:
-        try:
-            complex(s) # for complex
-        except ValueError:
-            return False
+	try:
+		float(s) # for int, long and float
+	except ValueError:
+		try:
+			complex(s) # for complex
+		except ValueError:
+			return False
 
-    return True
+	return True
 
 def split_paper(text):
+
+	from nltk.tokenize import sent_tokenize,word_tokenize
+
+
 	"""
 	Takes raw text file and splits into a list of strings 
 	at each occurence of three or more carriage returns
+
+	Needs heading-less fallback!!!
 	"""
 	introText =[]
 	methText =[]
 	discText = []
+	resText = []
 	chunk =[]
 	paras = []
 	sects = []
@@ -120,11 +128,6 @@ def split_paper(text):
 				sects.append(' '.join(cont))
 				cont = [i]
 
-	# for i in sects:
-	# 	print i + "\n\n"
-
-	# print len(sects)
-
 
 	""" 
 	Split based on header terms by word tokens 
@@ -139,28 +142,29 @@ def split_paper(text):
 				introText.append(text)
 			elif i=='method' or i=='methods':
 				methText.append(text)
+			elif i=='results':
+				resText.append(text)
 			elif i=='discussion' or i=='conclusions':
 				discText.append(text)
-
-
-
 
 	if introText:
 		introOut = introText[0].encode('ascii', errors='backslashreplace')
 	else:
-		introOut = sects[0:2]
+		introOut = sects[0:8]
 	if methText:
 		methOut = methText[0].encode('ascii', errors='backslashreplace')
 	else:
 		methOut = []
+	if resText:
+		resOut = resText[0].encode('ascii', errors='backslashreplace')
+	else:
+		resOut = []
 	if discText:
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
-		discOut = sects[-2:]
+		discOut = sects[-8:]
 
-	return  introOut, methOut, discOut
-
-
+	return  introOut, methOut, resOut, discOut
 
 def pre_clean(text):
 
@@ -169,14 +173,16 @@ def pre_clean(text):
 	text = re.sub('- ', '', text)
 	text = re.sub(', ,', ',', text)
 
-	# sents = sent_tokenize(text)
-	# out = []
+	sents = sent_tokenize(text)
+	out = []
 
-	# for s in sents:
-	# 	if s.find('E-mail') == -1 and s.find('http') == -1 and s.find("Current\ address") == -1 and s.find("Corresponding\ author") == -1 and s.find("Published\ by") == -1:
-	# 		out.append(s)
-
-	return text
+	for s in sents:
+		if s.find('www') == -1 and s.find('E-mail') == -1 and s.find('Email') == -1 \
+		and s.find('Corresponding\ author') == -1 and s.find('Current\ address') == -1 \
+		and s.find('Article\ history') == -1 and s.find('Tel.') == -1:
+			out.append(s)
+ 
+	return ' '.join(out)
 
 
 """"""""""""""""""
@@ -211,9 +217,7 @@ import codecs
 #   print l + "\n"
 
 
-
-text_utf = codecs.open('../sample.txt', encoding='utf-8')
-text_split = text_utf.read()
+text_split = codecs.open('text.txt', encoding='utf-8').read()
 
 inp = pre_clean(text_split)
 out = split_paper(inp)

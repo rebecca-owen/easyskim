@@ -11,14 +11,14 @@ Modified from http://glowingpython.blogspot.co.uk/2014/09/text-summarization-wit
 
 
 class FrequencySummarizer:
-  def __init__(self, low_thresh=0.3, high_thresh=0.9):
+  def __init__(self, low_thresh=0.1, high_thresh=0.9):
     """
      Initialize the text summarizer.
      Words that have a frequency term lower than low_thresh 
      or higer than high_thresh will be ignored.
     """
     ignore = ['fig','figure','ibid', 'et al','cf','NB','N.B.']
-
+    
     self._low_thresh = low_thresh
     self._high_thresh = high_thresh 
     self._stopwords = set(stopwords.words('english') + list(punctuation) + list(ignore))
@@ -61,4 +61,3 @@ class FrequencySummarizer:
   def _rank(self, ranking, n):
     """ return the first n sentences with highest ranking """
     return nlargest(n, ranking, key=ranking.get)
-
