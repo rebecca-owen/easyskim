@@ -12,7 +12,7 @@ At present, works locally on Mac and Linux machines, assuming requirements are s
 
 Deployment to website is pending OAuth2 and SSL fixes.
 
-Our Website (in progress): [easyskim.co.uk](http://easyskim.co.uk) 
+Our Website (in progress): [easyskim.co.uk](https://easyskim.co.uk) 
 <br>
 YouTube [Demonstration](https://www.youtube.com/watch?v=S7qVVjXWuCk&feature=youtu.be)
 <br> 
