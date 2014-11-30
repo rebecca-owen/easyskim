@@ -82,11 +82,10 @@ def split_paper(text):
 				discText.append(text)
 
 
-
 	if introText:
 		introOut = introText[0].encode('ascii', errors='backslashreplace')
 	else:
-		introOut = []
+		introOut = sects[0:2]
 	if methText:
 		methOut = methText[0].encode('ascii', errors='backslashreplace')
 	else:
@@ -94,7 +93,7 @@ def split_paper(text):
 	if discText:
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
-		discOut = []
+		discOut = sects[-2:]
 
 	return  introOut, methOut, discOut
 

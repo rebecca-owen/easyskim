@@ -156,7 +156,7 @@ def split_paper(text):
 	if discText:
 		discOut = discText[0].encode('ascii', errors='backslashreplace')
 	else:
-		discOut = sects[-1:]
+		discOut = sects[-2:]
 
 	return  introOut, methOut, discOut
 
@@ -212,7 +212,7 @@ import codecs
 
 
 
-text_utf = codecs.open('../test.pdf.txt', encoding='utf-8')
+text_utf = codecs.open('../sample.txt', encoding='utf-8')
 text_split = text_utf.read()
 
 inp = pre_clean(text_split)
