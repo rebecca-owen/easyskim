@@ -37,7 +37,6 @@ pip install -r requirements.txt
 
 export MENDELEY_CLIENT_ID= < >
 export MENDELEY_CLIENT_SECRET= < >
-
 ```
 
 For example:
@@ -45,7 +44,6 @@ For example:
 ```
 export MENDELEY_CLIENT_ID= 1181
 export MENDELEY_CLIENT_SECRET= kUSg3oEFhb58TAez
-
 ```
 
 Within the python interpreter, install nltk libraries as described [here](http://www.nltk.org/data.html) which launches the GUI installer.
@@ -53,7 +51,6 @@ Within the python interpreter, install nltk libraries as described [here](http:/
 ```
 import nltk
 nltk.download()
-
 ```
 
 
