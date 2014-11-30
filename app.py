@@ -14,6 +14,7 @@ import wrapper
 import codecs
 
 import jinja_filters
+import re
 
 
 
@@ -89,8 +90,7 @@ def document():
     raw_text, _ = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
     # info = getInfo(mendeley_session, doc_id)
-    final_text = '<pre>%s</pre>' % text
-    return json.dumps({ "text": final_text }), 200
+    return json.dumps({ "text": text }), 200
 
 @app.route('/static/<path:path>')
 def static_proxy(path):
@@ -174,6 +174,9 @@ def textToEncoded(text):
         clean = codecs.open(temp.name,encoding="utf-8").read()
 
     return clean
+
+def removeUnwantedSpaces(text):
+    pass
 
 if __name__ == '__main__':
     app.run()

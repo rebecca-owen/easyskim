@@ -39,20 +39,20 @@ def nlpExtract(cleanText,options):
     final = []
     for te in t:
         if te:
-            final.append(f.summarize(te,options[3])) 
+            final.append([x.replace('\n', ' ') for x in f.summarize(te,options[3])]) 
         elif not te:
             final.append("EMPTY")
 
     newstring = ""
 
     if  "EMPTY" not in final[0]:
-        newstring= "".join([newstring,"\n\n","Introduction\n\n","\n".join(final[0])])
+        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + " ".join(final[0]) + "</p>"])
     if  "EMPTY" not in final[1]:
-        newstring = "".join([newstring,"\n\n","Methods\n\n","\n".join(final[1])])
+        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + " ".join(final[1]) + "</p>"])
     if  "EMPTY" not in final[2]:
-        newstring = "".join([newstring,"\n\n","Results\n\n","\n".join(final[2])])
+        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + " ".join(final[2]) + "</p>"])
     if  "EMPTY" not in final[3]:
-        newstring = "".join([newstring,"\n\n","Conclusions\n\n","\n".join(final[3])])
+        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + " ".join(final[3]) + "</p>"])
 
     return newstring
 
@@ -76,7 +76,7 @@ def alchemyExtract(cleanText,options):
             finalKeywords.append(rKeywords[i]['text'])
     else:
         finalKeywords = rKeywords
-    return "".join(["Keywords: ",finalKeywords]) #figure out formatting for this later.
+    return "\n\nKeywords: " + ", ".join(finalKeywords) #figure out formatting for this later.
 
 if __name__ == '__main__':
     import codecs
