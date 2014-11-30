@@ -86,7 +86,7 @@ def document():
     mendeley_session = get_session_from_cookies()
 
     doc_id = request.form['doc_id']
-    raw_text = convertToTxt(getPdf(mendeley_session, doc_id))
+    raw_text, _ = convertToTxt(getPdf(mendeley_session, doc_id))
     text = wrapper.textChanger(textToEncoded(raw_text))
     # info = getInfo(mendeley_session, doc_id)
     final_text = '<pre>%s</pre>' % text
@@ -112,11 +112,11 @@ def uploaded_file():
         f = tempfile.NamedTemporaryFile(delete=False)
         f.write(temp.stream.read())
         f.close()
-        raw_text = convertToTxt(f)
+        raw_text, metadata = convertToTxt(f)
         text = wrapper.textChanger(textToEncoded(raw_text))
         final_text = '<pre>%s</pre>' % text
         print final_text
-        return json.dumps({ "text": final_text }), 200
+        return json.dumps({ "text": final_text, "meta": metadata }), 200
     return json.dumps({ "error": "not valid file" }), 500
 
 def get_mendeley_config():
@@ -160,8 +160,12 @@ def convertToTxt(pdf):
     """convert PDF (file object) to text, returns text"""
     # text = check_output(["pdftotext", pdf.name, "-"])
     text = check_output(["sh", "parseocr.sh", pdf.name])
+    with open(pdf.name+'.met') as f:
+        metadata = f.read()
     os.unlink(pdf.name)
-    return text
+    name = pdf.name
+    os.unlink(name+'.met')
+    return (text, metadata)
 
 def textToEncoded(text):
 
