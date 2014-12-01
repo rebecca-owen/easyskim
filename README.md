@@ -2,6 +2,7 @@ EasySkim
 ========
 
 ##Analyse and summarise your academic papers
+### Version 0.1
 
 Synchronise with your Mendeley library using their API or upload your own PDFs. EasySkim then processes the text from the pdf and uses natural language processing algorithms to produce brief summaries of the key sections of the paper. 
 
@@ -35,15 +36,15 @@ cd easyskim
 
 pip install -r requirements.txt
 
-export MENDELEY_CLIENT_ID= < >
-export MENDELEY_CLIENT_SECRET= < >
+export MENDELEY_CLIENT_ID=< >
+export MENDELEY_CLIENT_SECRET=< >
 ```
 
 For example:
 
 ```
-export MENDELEY_CLIENT_ID= 1181
-export MENDELEY_CLIENT_SECRET= kUSg3oEFhb58TAez
+export MENDELEY_CLIENT_ID=1181
+export MENDELEY_CLIENT_SECRET=kUSg3oEFhb58TAez
 ```
 
 Within the python interpreter, install nltk libraries as described [here](http://www.nltk.org/data.html) which launches the GUI installer.
