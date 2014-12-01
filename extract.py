@@ -1,9 +1,5 @@
 import re
 
-introMarkers = ["Introduction:","Beginning","Literature Review","1."]
-endMarkers = ["Results","Conclusion"]
-bibMarkers = ["References", "Bibliography","Citations"]
-
 def extract(cleanText,options):
     """Basic wrapper functions for the specific options.
 options[0] specifies which analysis will be run.

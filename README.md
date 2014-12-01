@@ -54,6 +54,8 @@ import nltk
 nltk.download()
 ```
 
+If you want to generate keywords using the Alchemy API, add "alchemy" when running textChanger in wrapper.py. To modify the default, the simplest solution, replace 'nltk' with 'nltkalchemy'. You will also have to add a file titled api_key.txt to the easyskim folder. You can get the key from [Alchemy Dev](http://www.alchemyapi.com/api/register.html).
+
 
 ### Temporary Local Use
 
