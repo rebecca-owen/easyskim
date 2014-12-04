@@ -22,18 +22,20 @@ def getSecrets():
             config = json.load(f)
             c_id = config['env']['MENDELEY_CLIENT_ID']['description']
             c_secret = config['env']['MENDELEY_CLIENT_SECRET']['description']
-            return c_id, c_secret
+            c_debug = config['env']['DEBUG']
+            return c_id, c_secret, c_debug
     c_id = os.environ.get('MENDELEY_CLIENT_ID')
     c_secret = os.environ.get('MENDELEY_CLIENT_SECRET')
+    c_debug = os.environ.getenv('EASYSKIM_DEBUG', True)
     if c_id and c_secret:
-        return c_id, c_secret
+        return c_id, c_secret, c_debug
     raise Exception('Mendeley client id and secret not found in configuration')
 
-client_id, client_secret = getSecrets()
+client_id, client_secret, debug = getSecrets()
 
 app = Flask(__name__)
 app.jinja_env.filters['authors'] = jinja_filters.authors
-app.debug = True
+app.debug = debug
 app.secret_key = client_secret
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
