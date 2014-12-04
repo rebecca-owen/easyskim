@@ -15,17 +15,21 @@ import codecs
 
 import jinja_filters
 
-# import ssl
-# print dir(ssl)
-# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-# ssl_context.load_cert_chain('ssl-bundle.crt', 'easyskim.key')
-# from OpenSSL import SSL
-# ssl_context = SSL.Context(SSL.SSLv23_METHOD)
-# ssl_context.use_privatekey_file('easyskim.key')
-# ssl_context.use_certificate_file('ssl-bundle.crt')
+def getSecrets():
+    config_file = 'app.json'
+    if os.path.exists(config_file):
+        with open(config_file) as f:
+            config = json.load(f)
+            c_id = config['env']['MENDELEY_CLIENT_ID']['description']
+            c_secret = config['env']['MENDELEY_CLIENT_SECRET']['description']
+            return c_id, c_secret
+    c_id = os.environ.get('MENDELEY_CLIENT_ID')
+    c_secret = os.environ.get('MENDELEY_CLIENT_SECRET')
+    if c_id and c_secret:
+        return c_id, c_secret
+    raise Exception('Mendeley client id and secret not found in configuration')
 
-client_id = os.environ['MENDELEY_CLIENT_ID']
-client_secret = os.environ['MENDELEY_CLIENT_SECRET']
+client_id, client_secret = getSecrets()
 
 app = Flask(__name__)
 app.jinja_env.filters['authors'] = jinja_filters.authors
@@ -182,6 +186,8 @@ def textToEncoded(text):
         clean = codecs.open(temp.name,encoding="utf-8").read()
 
     return clean
+
+
 
 if __name__ == '__main__':
     # app.run(host='127.0.0.1', port='5000', debug=False, ssl_context=ssl_context)
