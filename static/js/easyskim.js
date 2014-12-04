@@ -10,6 +10,7 @@ $(".document").click(function() {
 
 $( '#upload_form' )
   .submit( function( e ) {
+    $('#summary').html('<br><p>Preparing summary. Our apologies for the wait: the bits are running slowly today.</p>');
     $.ajax( {
       url: currentSite + '/uploaded',
       type: 'POST',

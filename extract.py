@@ -6,16 +6,16 @@ options[0] specifies which analysis will be run.
 options[1] is for alchemy, and specifies how many keywords will be returned.
 options[2] is for sectionExtract, and specifies...
 options[3] is for nltk, and specifies..."""
-    newstring=""
+    temp = []
     if "nltk" in options[0]:
-        newstring="".join([newstring,nlpExtract(cleanText,options)])
+        temp.append(nlpExtract(cleanText,options))
     if "alchemy" in options[0]:
-        newstring="".join([newstring,alchemyExtract(cleanText,options)])
+        temp.append(alchemyExtract(cleanText,options))
     if "nltk" not in options[0] and "alchemy" not in options[0]:
         print(options)
         raise Exception("""No valid options selected. Please enter some 
             combination of 'nltk', and 'alchemy""")
-    return newstring
+    return "".join(temp)
 
 def nlpExtract(cleanText,options):
     """Calls the split_paper and FrequencySummarizer programs. 
@@ -33,25 +33,15 @@ def nlpExtract(cleanText,options):
 
     #Instead of looping through output, fill empty sections with EMPTY and 
     #test for this when constructing newstring
+    sections = ['Introduction', 'Methods', 'Results', 'Conclusions']
     final = []
-    for te in t:
+    for i, te in enumerate(t):
         if te:
-            final.append([x.replace('\n', ' ') for x in f.summarize(te,options[3])]) 
-        elif not te:
-            final.append("EMPTY")
-
-    newstring = ""
-
-    if  "EMPTY" not in final[0]:
-        newstring= "".join([newstring,"\n\n","<h4>Introduction</h4>\n\n", "<p>" + removeUnwantedSpaces(" ".join(final[0])) + "</p>"])
-    if  "EMPTY" not in final[1]:
-        newstring = "".join([newstring,"\n\n","<h4>Methods</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[1])) + "</p>"])
-    if  "EMPTY" not in final[2]:
-        newstring = "".join([newstring,"\n\n","<h4>Results</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[2])) + "</p>"])
-    if  "EMPTY" not in final[3]:
-        newstring = "".join([newstring,"\n\n","<h4>Conclusions</h4>\n\n","<p>" + removeUnwantedSpaces(" ".join(final[3])) + "</p>"])
-
-    return newstring
+            temp = [x.replace('\n', ' ') for x in f.summarize(te,options[3])]
+            temp = removeUnwantedSpaces(" ".join(temp))
+            final.append('<h4>%s</h4><p>%s</p>' % (sections[i], temp)) 
+            
+    return "".join(final)
 
 def alchemyExtract(cleanText,options):
     """Uses alchemyAPI to find keywords in the cleaned text. 
@@ -82,8 +72,6 @@ def removeUnwantedSpaces(text):
     text = re.sub(' \.', '.', text)
     text = re.sub(' \,', ',', text)
     text = re.sub(' \;', ';', text)
-    text = re.sub("\\\\n"," ",text)
-    text = re.sub('", u"', '',text)
     return text
 
 if __name__ == '__main__':
