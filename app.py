@@ -26,7 +26,7 @@ def getSecrets():
             return c_id, c_secret, c_debug
     c_id = os.environ.get('MENDELEY_CLIENT_ID')
     c_secret = os.environ.get('MENDELEY_CLIENT_SECRET')
-    c_debug = os.environ.getenv('EASYSKIM_DEBUG', True)
+    c_debug = os.getenv('EASYSKIM_DEBUG', True)
     if c_id and c_secret:
         return c_id, c_secret, c_debug
     raise Exception('Mendeley client id and secret not found in configuration')
